@@ -4,6 +4,17 @@
     <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>ChiaRPC</AssemblyName>
     <RootNamespace>ChiaRPC</RootNamespace>
+    <Version>0.9.0</Version>
+    <Authors>Playwo</Authors>
+    <Company />
+    <Description>API Wrapper for the RPC interfaces exposed by the chia blockchain nodes</Description>
+    <Copyright>2021 Playwo</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/Playwo/ChiaRPC.Net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Playwo/ChiaRPC.Net</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>Chia</PackageTags>
+    <NeutralLanguage>English</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +24,13 @@
   <ItemGroup>
     <Folder Include="Models\Farmer\" />
     <Folder Include="Results\Farmer\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
