@@ -39,5 +39,18 @@ namespace ChiaRPC.Clients
             });
             return result.Address;
         }
+
+        /// <summary>
+        /// Creates a wallet backup file at the given file path.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public async Task CreateBackupFileAsync(string filePath)
+        {
+            await PostAsync<ChiaResult>(WalletRoutes.CreateBackupFile(), new Dictionary<string, string>()
+            {
+                ["file_path"] = filePath,
+            });
+        }
     }
 }

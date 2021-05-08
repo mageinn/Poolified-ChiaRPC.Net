@@ -9,5 +9,8 @@ namespace ChiaRPC.Routes
 
         public static Uri GetWalletAddress()
             => new Uri("get_next_address", UriKind.Relative);
+
+        public static Uri CreateBackupFile()
+            => new Uri("create_backup", UriKind.Relative);
     }
 }
