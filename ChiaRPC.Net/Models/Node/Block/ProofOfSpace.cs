@@ -6,12 +6,19 @@ namespace ChiaRPC.Models
     {
         [JsonPropertyName("challenge")]
         public string Challenge { get; init; }
+
         [JsonPropertyName("plot_public_key")]
         public string PlotPublicKey { get; init; }
+
         [JsonPropertyName("pool_public_key")]
         public string PoolPublicKey { get; init; }
+
+        [JsonPropertyName("pool_contract_puzzle_hash")]
+        public string PoolContractPuzzleHash { get; init; }
+
         [JsonPropertyName("proof")]
         public string Proof { get; init; }
+
         [JsonPropertyName("size")]
         public int Size { get; init; }
 
