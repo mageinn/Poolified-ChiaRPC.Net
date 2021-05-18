@@ -52,5 +52,33 @@ namespace ChiaRPC.Clients
             });
             return result.Blocks;
         }
+
+        /// <summary>
+        /// Gets a recent EndOfSubSlotBundle.
+        /// </summary>
+        /// <param name="challengeHash"></param>
+        /// <returns></returns>
+        public async Task<RecentEndOfSubSlotBundle> GetRecentEndOfSubSlotBundleAsync(string challengeHash)
+        {
+            var result = await PostAsync<GetRecentEosResult>(FullNodeRoutes.GetRecentSignagePointOrEos(), new Dictionary<string, string>()
+            {
+                ["challenge_hash"] = challengeHash
+            });
+            return new RecentEndOfSubSlotBundle(result.EndOfSubSlotBundle, result.ReceivedAt, result.Reverted);
+        }
+
+        /// <summary>
+        /// Gets a recent SignagePoint.
+        /// </summary>
+        /// <param name="signagePointHash"></param>
+        /// <returns></returns>
+        public async Task<RecentSignagePoint> GetRecentSignagePoint(string signagePointHash)
+        {
+            var result = await PostAsync<GetRecentSignagePointResult>(FullNodeRoutes.GetRecentSignagePointOrEos(), new Dictionary<string, string>()
+            {
+                ["sp_hash"] = signagePointHash
+            });
+            return new RecentSignagePoint(result.SignagePoint, result.ReceivedAt, result.Reverted);
+        }
     }
 }

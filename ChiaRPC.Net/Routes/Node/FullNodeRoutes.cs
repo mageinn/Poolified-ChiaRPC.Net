@@ -12,5 +12,8 @@ namespace ChiaRPC.Routes
 
         public static Uri GetBlocks()
             => new Uri("get_blocks", UriKind.Relative);
+
+        public static Uri GetRecentSignagePointOrEos()
+            => new Uri("get_recent_signage_point_or_eos", UriKind.Relative);
     }
 }
