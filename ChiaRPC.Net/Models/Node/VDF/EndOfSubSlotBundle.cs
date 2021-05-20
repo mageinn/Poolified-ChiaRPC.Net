@@ -2,6 +2,6 @@
 {
     public sealed class EndOfSubSlotBundle
     {
-         //ToDo if required
+        //ToDo if required
     }
 }
