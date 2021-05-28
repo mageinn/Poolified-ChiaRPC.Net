@@ -1,6 +1,4 @@
 ﻿using ChiaRPC.Parsers;
-using ChiaRPC.Utils;
-using System.Security.Cryptography;
 using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Models
@@ -8,18 +6,20 @@ namespace ChiaRPC.Models
     public sealed class ProofOfSpace
     {
         [JsonPropertyName("challenge")]
-        public string Challenge { get; init; }
+        [JsonConverter(typeof(HexBytesConverter))]
+        public HexBytes Challenge { get; init; }
 
         [JsonPropertyName("plot_public_key")]
-        [JsonConverter(typeof(G1ElementConverter))]
-        public G1Element PlotPublicKey { get; init; }
+        [JsonConverter(typeof(HexBytesConverter))]
+        public HexBytes PlotPublicKey { get; init; }
 
         [JsonPropertyName("pool_public_key")]
-        [JsonConverter(typeof(G1ElementConverter))]
-        public G1Element PoolPublicKey { get; init; }
+        [JsonConverter(typeof(HexBytesConverter))]
+        public HexBytes PoolPublicKey { get; init; }
 
         [JsonPropertyName("pool_contract_puzzle_hash")]
-        public string PoolContractPuzzleHash { get; init; }
+        [JsonConverter(typeof(HexBytesConverter))]
+        public HexBytes PoolContractPuzzleHash { get; init; }
 
         [JsonPropertyName("proof")]
         public string Proof { get; init; }
@@ -32,30 +32,27 @@ namespace ChiaRPC.Models
         {
         }
 
-        public string GetPlotId()
+        public HexBytes GetPlotId()
         {
-            if ((PoolPublicKey == null && string.IsNullOrWhiteSpace(PoolContractPuzzleHash)) ||
-                (PoolPublicKey != null && !string.IsNullOrWhiteSpace(PoolContractPuzzleHash)))
+            if (PoolPublicKey.IsEmpty == PoolContractPuzzleHash.IsEmpty)
             {
-                return null;
+                return HexBytes.Empty;
             }
 
-            return PoolPublicKey == null
+            return PoolPublicKey.IsEmpty
                 ? GetPlotIdByPuzzleHash()
                 : GetPlotIdByPublicKey();
         }
 
-        private string GetPlotIdByPuzzleHash()
+        private HexBytes GetPlotIdByPuzzleHash()
         {
-            byte[] bytes = HexUtils.HexStringToByteArray(PoolContractPuzzleHash + PlotPublicKey.ToString());
-            byte[] hashedBytes = SHA256.HashData(bytes);
-            return HexUtils.ByteArrayToHexString(hashedBytes);
+            var concatenated = PoolContractPuzzleHash + PlotPublicKey;
+            return concatenated.Sha256();
         }
-        private string GetPlotIdByPublicKey()
+        private HexBytes GetPlotIdByPublicKey()
         {
-            byte[] bytes = HexUtils.HexStringToByteArray(PoolPublicKey.ToString() + PlotPublicKey.ToString());
-            byte[] hashedBytes = SHA256.HashData(bytes);
-            return HexUtils.ByteArrayToHexString(hashedBytes);
+            var concatenated = PoolPublicKey + PlotPublicKey;
+            return concatenated.Sha256();
         }
     }
 }

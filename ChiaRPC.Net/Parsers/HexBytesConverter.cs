@@ -5,20 +5,20 @@ using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Parsers
 {
-    public sealed class G1ElementConverter : JsonConverter<G1Element>
+    public sealed class HexBytesConverter : JsonConverter<HexBytes>
     {
-        public override G1Element Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override HexBytes Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             string hexG1Element = reader.GetString();
 
             return string.IsNullOrWhiteSpace(hexG1Element)
-                ? null
-                : G1Element.FromHex(hexG1Element);
+                ? HexBytes.Empty
+                : HexBytes.FromHex(hexG1Element);
         }
 
-        public override void Write(Utf8JsonWriter writer, G1Element value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, HexBytes value, JsonSerializerOptions options)
         {
-            if (value == null)
+            if (value.IsEmpty)
             {
                 writer.WriteStringValue("");
             }

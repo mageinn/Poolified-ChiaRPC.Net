@@ -52,5 +52,16 @@ namespace ChiaRPC.Clients
                 ["file_path"] = filePath,
             });
         }
+
+        /// <summary>
+        /// Gets a list of WalletInfos for the currently logged in key.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<WalletInfo[]> GetWalletsAsync()
+        {
+            var result = await PostAsync<GetWalletsResult>(WalletRoutes.GetWallets());
+
+            return result.Wallets;
+        }
     }
 }
