@@ -1,0 +1,22 @@
+name: PublishToNuget
+
+on: 
+  push:
+    branches:
+    - master
+
+jobs:
+  Build-And-Publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Pull Repository
+      uses: actions/checkout@v2
+    - name: Setup .Net Core
+      uses: actions/setup-dotnet@v1.8.0
+      with:
+        dotnet-version: '5.0.x'
+    - name: Build with dotnet
+      run: dotnet pack ./InteractivityAddon --output Packages
+    - name: Push to Nuget
+      run: dotnet nuget push Packages/ -s nuget.org -k ${{ secrets.NUGET_API_KEY }}
