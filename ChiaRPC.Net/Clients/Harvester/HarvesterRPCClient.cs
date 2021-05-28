@@ -8,8 +8,8 @@ namespace ChiaRPC.Clients
 {
     public sealed class HarvesterRPCClient : ChiaRPCClient
     {
-        public HarvesterRPCClient(string harvesterCertificateDirectory, string apiUrl)
-            : base(harvesterCertificateDirectory, "harvester", apiUrl)
+        public HarvesterRPCClient(ChiaRPCOptions options, string apiUrl)
+            : base(options, "harvester", apiUrl)
         {
         }
 

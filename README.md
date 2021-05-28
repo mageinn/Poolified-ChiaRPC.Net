@@ -15,9 +15,12 @@ https://www.nuget.org/packages/ChiaRPC/
   - `AddChiaHarvesterClient`
   - `AddChiaNodeClient`
   - `AddChiaWalletClient`
+- If required change the default settings with the parameters in those methods or use `ConfigureChiaRPC` to change the certificate path
 
 <b>Note: <br>
 Instead of using the ServiceCollection you can always just create instead of the client types yourself.</b>
 
-## Incomplete
-This does not yet cover all endpoints provided by the RPC Interfaces. In case you need any endpoints that are not yet included in the library please leave an issue and I will take care of it!
+
+## Warning
+- Treat user input into this library with caution as especially the wallet endpoints can be used to spend the coins stored in the wallet!
+- This does not yet cover all endpoints provided by the RPC Interfaces. In case you need any endpoints that are not yet included in the library please leave an issue and I will take care of it!

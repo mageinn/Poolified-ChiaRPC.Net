@@ -6,8 +6,8 @@ namespace ChiaRPC.Clients
 {
     public sealed class FarmerRPCClient : ChiaRPCClient
     {
-        public FarmerRPCClient(string farmerCertificateDirectory, string apiUrl)
-            : base(farmerCertificateDirectory, "farmer", apiUrl)
+        public FarmerRPCClient(ChiaRPCOptions options, string apiUrl)
+            : base(options, "farmer", apiUrl)
         {
         }
 

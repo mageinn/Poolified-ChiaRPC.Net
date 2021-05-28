@@ -8,8 +8,8 @@ namespace ChiaRPC.Clients
 {
     public sealed class WalletRPCClient : ChiaRPCClient
     {
-        public WalletRPCClient(string walletCertificateDirectory, string apiUrl)
-            : base(walletCertificateDirectory, "wallet", apiUrl)
+        public WalletRPCClient(ChiaRPCOptions options, string apiUrl) 
+            : base(options, "wallet", apiUrl)
         {
         }
 

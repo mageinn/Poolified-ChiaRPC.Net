@@ -13,13 +13,15 @@ namespace ChiaRPC.Clients
 {
     public abstract class ChiaRPCClient
     {
+        private readonly ChiaRPCOptions Options;
         private readonly HttpClient Client;
         private readonly Uri ApiUrl;
 
-        internal ChiaRPCClient(string certDir, string certName, string apiUrl)
+        internal ChiaRPCClient(ChiaRPCOptions options, string certName, string apiUrl)
         {
+            Options = options;
             ApiUrl = new Uri(apiUrl);
-            var certificate = LoadCertificate(certDir, certName);
+            var certificate = LoadCertificate(Options.SslCertificateDirectory, certName);
             Client = CreateClient(certificate);
         }
 

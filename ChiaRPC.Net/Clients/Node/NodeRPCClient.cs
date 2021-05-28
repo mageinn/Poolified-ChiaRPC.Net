@@ -8,8 +8,8 @@ namespace ChiaRPC.Clients
 {
     public sealed class NodeRPCClient : ChiaRPCClient
     {
-        public NodeRPCClient(string fullnodeCertificateDirectory, string apiUrl)
-            : base(fullnodeCertificateDirectory, "full_node", apiUrl)
+        public NodeRPCClient(ChiaRPCOptions options, string apiUrl) 
+            : base(options, "full_node", apiUrl)
         {
         }
 
