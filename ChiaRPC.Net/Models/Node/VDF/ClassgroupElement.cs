@@ -1,11 +1,13 @@
-﻿using System.Text.Json.Serialization;
+﻿using ChiaRPC.Parsers;
+using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Models
 {
     public sealed class ClassgroupElement
     {
         [JsonPropertyName("data")]
-        public string Data { get; init; }
+        [JsonConverter(typeof(HexBytesConverter))]
+        public HexBytes Data { get; init; }
 
         public ClassgroupElement()
         {

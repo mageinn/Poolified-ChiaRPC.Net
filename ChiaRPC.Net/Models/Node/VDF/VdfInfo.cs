@@ -1,11 +1,13 @@
-﻿using System.Text.Json.Serialization;
+﻿using ChiaRPC.Parsers;
+using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Models
 {
     public sealed class VdfInfo
     {
         [JsonPropertyName("challenge")]
-        public string Challenge { get; init; }
+        [JsonConverter(typeof(HexBytesConverter))]
+        public HexBytes Challenge { get; init; }
 
         [JsonPropertyName("number_of_iterations")]
         public long Iterations { get; init; }

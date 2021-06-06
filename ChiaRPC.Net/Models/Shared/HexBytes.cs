@@ -15,8 +15,8 @@ namespace ChiaRPC.Models
 
         public HexBytes(string hex, byte[] bytes)
         {
-            Hex = hex;
-            Bytes = bytes;
+            Hex = hex ?? string.Empty;
+            Bytes = bytes ?? Array.Empty<byte>();
         }
 
         public HexBytes Sha256()
@@ -39,13 +39,18 @@ namespace ChiaRPC.Models
             => a.Hex.ToUpperInvariant() != b.Hex.ToUpperInvariant();
 
         public static HexBytes FromHex(string hex) 
-            => hex.StartsWith("0x")
-                ? new HexBytes(hex[2..], HexUtils.HexStringToByteArray(hex[2..]))
-                : new HexBytes(hex, HexUtils.HexStringToByteArray(hex));
-        public static HexBytes FromBytes(byte[] bytes)
-            => new HexBytes(
-                HexUtils.ByteArrayToHexString(bytes),
-                bytes);
+            => string.IsNullOrWhiteSpace(hex)
+                ? Empty
+                : hex.StartsWith("0x")
+                    ? new HexBytes(hex[2..], HexUtils.HexStringToByteArray(hex[2..]))
+                    : new HexBytes(hex, HexUtils.HexStringToByteArray(hex));
+
+        public static HexBytes FromBytes(byte[] bytes) 
+            => bytes == null
+                ? Empty
+                : new HexBytes(
+                    HexUtils.ByteArrayToHexString(bytes),
+                    bytes);
 
         public override bool Equals(object obj)
             => obj is HexBytes other && Hex == other.Hex;
