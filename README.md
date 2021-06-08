@@ -1,7 +1,11 @@
-# ChiaRPC.Net
+# Poolified-ChiaRPC.Net
 
 Wrapper library around the endpoints exposed by the RPC interfaces in the chia blockchain.
 The available interface methods can be looked up [here](https://github.com/Chia-Network/chia-blockchain/wiki/RPC-Interfaces).
+
+## Differences to version on Nuget
+The only difference is that this fork contains some endpoints only found in the <a href="https://github.com/mageinn/Poolified-ChiaRPC.Net">poolfied-chia-blockchain</a> fork.
+
 
 ## How to use
 ### Install via nuget
