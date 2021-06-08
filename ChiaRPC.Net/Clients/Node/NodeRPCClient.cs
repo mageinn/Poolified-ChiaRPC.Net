@@ -1,5 +1,6 @@
 ﻿using ChiaRPC.Models;
 using ChiaRPC.Results;
+using ChiaRPC.Results.Node;
 using ChiaRPC.Routes;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -79,6 +80,20 @@ namespace ChiaRPC.Clients
                 ["sp_hash"] = signagePointHash
             });
             return new RecentSignagePoint(result.SignagePoint, result.ReceivedAt, result.Reverted);
+        }
+
+        /// <summary>
+        /// Converts the a launcherId to a P2Singleton Puzzle Hash.
+        /// </summary>
+        /// <param name="launcherId"></param>
+        /// <returns></returns>
+        public async Task<HexBytes> GetPayToSingletonPuzzleHashFromLauncherIdAsync(HexBytes launcherId)
+        {
+            var result = await PostAsync<GetPayToSingletonPuzzleHashFromLauncherIdResult>(FullNodeRoutes.GetPayToSingletonPuzzleHashFromLauncherId(), new Dictionary<string, string>()
+            {
+                ["launcher_id"] = launcherId.Hex,
+            });
+            return result.PayToSingletonPuzzleHash;
         }
     }
 }

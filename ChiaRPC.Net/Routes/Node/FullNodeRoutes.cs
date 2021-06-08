@@ -15,5 +15,8 @@ namespace ChiaRPC.Routes
 
         public static Uri GetRecentSignagePointOrEos()
             => new Uri("get_recent_signage_point_or_eos", UriKind.Relative);
+
+        public static Uri GetPayToSingletonPuzzleHashFromLauncherId()
+            => new Uri("get_p2_puzzle_hash_from_launcher_id", UriKind.Relative);
     }
 }
