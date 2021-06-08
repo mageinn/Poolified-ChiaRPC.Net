@@ -1,6 +1,5 @@
 ﻿using ChiaRPC.Models;
 using ChiaRPC.Results;
-using ChiaRPC.Results.Node;
 using ChiaRPC.Routes;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -94,6 +93,30 @@ namespace ChiaRPC.Clients
                 ["launcher_id"] = launcherId.Hex,
             });
             return result.PayToSingletonPuzzleHash;
+        }
+
+        /// <summary>
+        /// Verifies the signature of the payload.
+        /// </summary>
+        /// <param name="ownerPk"></param>
+        /// <param name="plotPk"></param>
+        /// <param name="authPk"></param>
+        /// <param name="serializedAuthenticationKeyInfo"></param>
+        /// <param name="payloadHash"></param>
+        /// <param name="signature"></param>
+        /// <returns></returns>
+        public async Task<bool> AggregateVerifyAsync(HexBytes ownerPk, HexBytes plotPk, HexBytes authPk, HexBytes serializedAuthenticationKeyInfo, HexBytes payloadHash, HexBytes signature)
+        {
+            var result = await PostAsync<AggregateVerifyResult>(FullNodeRoutes.AggregateVerify(), new Dictionary<string, string>()
+            {
+                ["owner_pk"] = $"{ownerPk}",
+                ["plot_public_key"] = $"{plotPk}",
+                ["authentication_public_key"] = $"{authPk}",
+                ["authentication_key_info"] = $"{serializedAuthenticationKeyInfo}",
+                ["payload_hash"] = $"{payloadHash}",
+                ["signature"] = $"{signature}"
+            });
+            return result.ValidSignature;
         }
     }
 }

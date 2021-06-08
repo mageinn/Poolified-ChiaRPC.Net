@@ -1,7 +1,7 @@
 ﻿using ChiaRPC.Models;
 using System.Text.Json.Serialization;
 
-namespace ChiaRPC.Results.Node
+namespace ChiaRPC.Results
 {
     internal sealed class GetPayToSingletonPuzzleHashFromLauncherIdResult : ChiaResult
     {
