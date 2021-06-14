@@ -56,7 +56,6 @@ namespace ChiaRPC.Clients
             return new RecentSignagePoint(result.SignagePoint, result.ReceivedAt, result.Reverted);
         }
 
-
         async Task<HexBytes> IExtendedNodeRPCClient.GetPayToSingletonPuzzleHashFromLauncherIdAsync(HexBytes launcherId)
         {
             var result = await PostAsync<GetPayToSingletonPuzzleHashFromLauncherIdResult>(FullNodeRoutes.GetPayToSingletonPuzzleHashFromLauncherId(), new Dictionary<string, string>()
@@ -65,7 +64,6 @@ namespace ChiaRPC.Clients
             });
             return result.PayToSingletonPuzzleHash;
         }
-
 
         async Task<bool> IExtendedNodeRPCClient.AggregateVerifyAsync(HexBytes ownerPk, HexBytes plotPk, HexBytes authPk, HexBytes serializedAuthenticationKeyInfo, HexBytes payloadHash, HexBytes signature)
         {
@@ -79,6 +77,20 @@ namespace ChiaRPC.Clients
                 ["signature"] = $"{signature}"
             });
             return result.ValidSignature;
+        }
+
+        async Task<ProofQuality> IExtendedNodeRPCClient.GetProofQualityAsync(ProofOfSpace proof)
+        {
+            var result = await PostAsync<GetProofQualityStringResult>(FullNodeRoutes.GetProofQualityString(), new Dictionary<string, string>()
+            {
+                ["plotId"] = proof.GetPlotId().Hex,
+                ["size"] = $"{proof.Size}",
+                ["challenge"] = proof.Challenge.Hex,
+                ["proof"] = proof.Proof
+            });
+            return result.Valid
+                ? new ProofQuality(true, result.QualityString)
+                : new ProofQuality(false, HexBytes.Empty);
         }
     }
 }

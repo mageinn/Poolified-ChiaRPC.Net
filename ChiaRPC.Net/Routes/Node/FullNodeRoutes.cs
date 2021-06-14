@@ -21,5 +21,8 @@ namespace ChiaRPC.Routes
 
         public static Uri AggregateVerify()
             => new Uri("aggregate_verify", UriKind.Relative);
+
+        public static Uri GetProofQualityString()
+            => new Uri("get_proof_quality_string", UriKind.Relative);
     }
 }

@@ -23,5 +23,12 @@ namespace ChiaRPC.Clients
         /// <param name="signature"></param>
         /// <returns></returns>
         Task<bool> AggregateVerifyAsync(HexBytes ownerPk, HexBytes plotPk, HexBytes authPk, HexBytes serializedAuthenticationKeyInfo, HexBytes payloadHash, HexBytes signature);
+
+        /// <summary>
+        /// Calculates the quality string of a given proof.
+        /// </summary>
+        /// <param name="proof"></param>
+        /// <returns></returns>
+        Task<ProofQuality> GetProofQualityAsync(ProofOfSpace proof);
     }
 }
