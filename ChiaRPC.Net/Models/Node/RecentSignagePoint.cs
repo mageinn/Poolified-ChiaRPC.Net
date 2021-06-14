@@ -17,5 +17,8 @@ namespace ChiaRPC.Models
         {
             SignagePoint = signagePoint;
         }
+
+        public override HexBytes GetChallengeHash()
+            => SignagePoint.CC_Vdf.Challenge;
     }
 }
