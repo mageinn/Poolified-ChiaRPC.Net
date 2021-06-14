@@ -1,4 +1,4 @@
-name: PublishToNuget
+name: PublishToBaget
 
 on: 
   push:
@@ -11,12 +11,14 @@ jobs:
     
     steps:
     - name: Pull Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v1
     - name: Setup .Net Core
       uses: actions/setup-dotnet@v1.8.0
       with:
         dotnet-version: '5.0.x'
+    - name: Register Baget Package Source
+      run: dotnet nuget add source https://baget.playwo.de/v3/index.json
     - name: Build with dotnet
       run: dotnet pack ./ChiaRPC.Net --output Packages
-    - name: Push to Nuget
-      run: dotnet nuget push Packages/ -s nuget.org -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+    - name: Push to BaGet
+      run: dotnet nuget push Packages/ -s https://baget.playwo.de -k ${{ secrets.BAGET_API_KEY }} --skip-duplicate
