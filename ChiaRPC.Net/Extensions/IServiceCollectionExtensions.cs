@@ -37,10 +37,16 @@ namespace ChiaRPC.Extensions
         public static IServiceCollection AddChiaNodeClient(this IServiceCollection services, string apiUrl = "https://localhost:8555/")
         {
             services.TryAddSingleton<ChiaRPCOptions>();
-            return services.AddSingleton(provider =>
+
+            services.AddSingleton(provider =>
             {
                 var options = provider.GetRequiredService<ChiaRPCOptions>();
                 return new NodeRPCClient(options, apiUrl);
+            });
+            return services.AddSingleton<IExtendedNodeRPCClient>(provider =>
+            {
+                var client = provider.GetRequiredService<NodeRPCClient>();
+                return client;
             });
         }
 
