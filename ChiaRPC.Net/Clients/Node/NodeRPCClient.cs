@@ -83,7 +83,7 @@ namespace ChiaRPC.Clients
         {
             var result = await PostAsync<GetProofQualityStringResult>(FullNodeRoutes.GetProofQualityString(), new Dictionary<string, string>()
             {
-                ["plotId"] = proof.GetPlotId().Hex,
+                ["plot_id"] = proof.GetPlotId().Hex,
                 ["size"] = $"{proof.Size}",
                 ["challenge"] = proof.Challenge.Hex,
                 ["proof"] = proof.Proof
