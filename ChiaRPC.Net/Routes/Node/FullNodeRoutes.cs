@@ -27,5 +27,8 @@ namespace ChiaRPC.Routes
 
         public static Uri GetProofQualityString()
             => new Uri("get_proof_quality_string", UriKind.Relative);
+
+        public static Uri GetCoinRecordByName()
+            => new Uri("get_coin_record_by_name", UriKind.Relative);
     }
 }

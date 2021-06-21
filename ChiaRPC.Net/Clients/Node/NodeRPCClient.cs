@@ -56,6 +56,16 @@ namespace ChiaRPC.Clients
             return new RecentSignagePoint(result.SignagePoint, result.ReceivedAt, result.Reverted);
         }
 
+        public async Task<CoinRecord> GetCoinRecordByNameAsync(HexBytes name)
+        {
+            var result = await PostAsync<GetCoinRecordByNameResult>(FullNodeRoutes.GetCoinRecordByName(), new Dictionary<string, string>()
+            {
+                ["name"] = $"{name}"
+            }, false);
+
+            return result.CoinRecord;
+        }
+
         async Task<HexBytes> IExtendedNodeRPCClient.GetPayToSingletonPuzzleHashFromLauncherIdAsync(HexBytes launcherId)
         {
             var result = await PostAsync<GetPayToSingletonPuzzleHashFromLauncherIdResult>(FullNodeRoutes.GetPayToSingletonPuzzleHashFromLauncherId(), new Dictionary<string, string>()

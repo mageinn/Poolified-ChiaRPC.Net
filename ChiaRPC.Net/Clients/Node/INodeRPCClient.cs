@@ -39,5 +39,12 @@ namespace ChiaRPC.Clients
         /// <param name="signagePointHash"></param>
         /// <returns></returns>
         Task<RecentSignagePoint> GetRecentSignagePoint(HexBytes signagePointHash);
+
+        /// <summary>
+        /// Retrieves a coin record by its name/id.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        Task<CoinRecord> GetCoinRecordByNameAsync(HexBytes name);
     }
 }
