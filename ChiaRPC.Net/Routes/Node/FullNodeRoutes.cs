@@ -19,8 +19,11 @@ namespace ChiaRPC.Routes
         public static Uri GetPayToSingletonPuzzleHashFromLauncherId()
             => new Uri("get_p2_puzzle_hash_from_launcher_id", UriKind.Relative);
 
-        public static Uri AggregateVerify()
-            => new Uri("aggregate_verify", UriKind.Relative);
+        public static Uri AggregateVerifySignature()
+            => new Uri("aggregate_verify_signature", UriKind.Relative);
+
+        public static Uri VerifySignature()
+            => new Uri("verify_signature", UriKind.Relative);
 
         public static Uri GetProofQualityString()
             => new Uri("get_proof_quality_string", UriKind.Relative);

@@ -65,9 +65,9 @@ namespace ChiaRPC.Clients
             return result.PayToSingletonPuzzleHash;
         }
 
-        async Task<bool> IExtendedNodeRPCClient.AggregateVerifyAsync(HexBytes ownerPk, HexBytes plotPk, HexBytes authPk, HexBytes serializedAuthenticationKeyInfo, HexBytes payloadHash, HexBytes signature)
+        async Task<bool> IExtendedNodeRPCClient.AggregateVerifySignatureAsync(HexBytes ownerPk, HexBytes plotPk, HexBytes authPk, HexBytes serializedAuthenticationKeyInfo, HexBytes payloadHash, HexBytes signature)
         {
-            var result = await PostAsync<AggregateVerifyResult>(FullNodeRoutes.AggregateVerify(), new Dictionary<string, string>()
+            var result = await PostAsync<VerifyResult>(FullNodeRoutes.AggregateVerifySignature(), new Dictionary<string, string>()
             {
                 ["owner_pk"] = $"{ownerPk}",
                 ["plot_public_key"] = $"{plotPk}",
@@ -76,6 +76,18 @@ namespace ChiaRPC.Clients
                 ["payload_hash"] = $"{payloadHash}",
                 ["signature"] = $"{signature}"
             });
+            return result.ValidSignature;
+        }
+
+        async Task<bool> IExtendedNodeRPCClient.VerifySignatureAsync(HexBytes ownerPk, HexBytes payloadHash, HexBytes signature)
+        {
+            var result = await PostAsync<VerifyResult>(FullNodeRoutes.VerifySignature(), new Dictionary<string, string>()
+            {
+                ["owner_pk"] = $"{ownerPk}",
+                ["payload_hash"] = $"{payloadHash}",
+                ["signature"] = $"{signature}",
+            });
+
             return result.ValidSignature;
         }
 
