@@ -65,6 +65,15 @@ namespace ChiaRPC.Clients
 
             return result.CoinRecord;
         }
+        public async Task<CoinSolution> GetPuzzleAndSolution(HexBytes coinId, ulong height)
+        {
+            var result = await PostAsync<GetPuzzleAndSolutionResult>(FullNodeRoutes.GetPuzzleAndSolution(), new Dictionary<string, string>()
+            {
+                ["coin_id"] = $"{coinId}",
+                ["height"] = $"{height}",
+            });
+            return result.CoinSolution;
+        }
 
         async Task<HexBytes> IExtendedNodeRPCClient.GetPayToSingletonPuzzleHashFromLauncherIdAsync(HexBytes launcherId)
         {
@@ -114,5 +123,6 @@ namespace ChiaRPC.Clients
                 ? new ProofQuality(true, result.QualityString)
                 : new ProofQuality(false, HexBytes.Empty);
         }
+
     }
 }

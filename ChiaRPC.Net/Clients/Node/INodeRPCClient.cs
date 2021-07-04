@@ -46,5 +46,13 @@ namespace ChiaRPC.Clients
         /// <param name="name"></param>
         /// <returns></returns>
         Task<CoinRecord> GetCoinRecordByNameAsync(HexBytes name);
+
+        /// <summary>
+        /// Gets the puzzle and solution of a spent coin.
+        /// </summary>
+        /// <param name="coinId"></param>
+        /// <param name="height"></param>
+        /// <returns></returns>
+        Task<CoinSolution> GetPuzzleAndSolution(HexBytes coinId, ulong height);
     }
 }

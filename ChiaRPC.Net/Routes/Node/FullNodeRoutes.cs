@@ -30,5 +30,8 @@ namespace ChiaRPC.Routes
 
         public static Uri GetCoinRecordByName()
             => new Uri("get_coin_record_by_name", UriKind.Relative);
+
+        public static Uri GetPuzzleAndSolution()
+            => new Uri("get_puzzle_and_solution", UriKind.Relative);
     }
 }
