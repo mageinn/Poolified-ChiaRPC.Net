@@ -54,5 +54,12 @@ namespace ChiaRPC.Clients
         /// <param name="height"></param>
         /// <returns></returns>
         Task<CoinSolution> GetPuzzleAndSolution(HexBytes coinId, ulong height);
+
+        /// <summary>
+        /// Gets the puzzle and solution of a spent coin.
+        /// </summary>
+        /// <param name="coinRecord"></param>
+        /// <returns></returns>
+        Task<CoinSolution> GetPuzzleAndSolution(CoinRecord coinRecord);
     }
 }

@@ -25,6 +25,9 @@ namespace ChiaRPC.Models
         [JsonConverter(typeof(JsonDateTimeOffsetConverter))]
         public DateTimeOffset Timestamp { get; init; }
 
+        public HexBytes Name()
+            => Coin.Name();
+
         public CoinRecord()
         {
         }

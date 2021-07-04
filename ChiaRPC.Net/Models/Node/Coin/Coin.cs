@@ -1,4 +1,5 @@
 ﻿using ChiaRPC.Parsers;
+using System;
 using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Models
@@ -19,5 +20,8 @@ namespace ChiaRPC.Models
         public Coin()
         {
         }
+
+        public HexBytes Name()
+            => (ParentCoinInfo + PuzzleHash + BitConverter.GetBytes(Amount)).Sha256();
     }
 }

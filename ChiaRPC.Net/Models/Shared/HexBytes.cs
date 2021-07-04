@@ -31,6 +31,23 @@ namespace ChiaRPC.Models
 
             return new HexBytes(concatHex, concatBytes);
         }
+        public static HexBytes operator +(HexBytes a, byte[] b)
+        {
+            string bs = HexMate.Convert.ToHexString(b);
+            string concatHex = string.Concat(a.Hex, bs);
+            byte[] concatBytes = a.Bytes.Concat(b).ToArray();
+
+            return new HexBytes(concatHex, concatBytes);
+        }
+        public static HexBytes operator +(HexBytes a, string b)
+        {
+            byte[] bb = HexMate.Convert.FromHexString(b);
+            string concatHex = string.Concat(a.Hex, b);
+            byte[] concatBytes = a.Bytes.Concat(bb).ToArray();
+
+            return new HexBytes(concatHex, concatBytes);
+        }
+
         public static bool operator ==(HexBytes a, HexBytes b) 
             => a.Hex.ToUpperInvariant() == b.Hex.ToUpperInvariant();
         public static bool operator !=(HexBytes a, HexBytes b)
