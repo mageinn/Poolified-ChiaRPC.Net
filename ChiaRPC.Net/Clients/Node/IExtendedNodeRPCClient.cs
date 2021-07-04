@@ -6,11 +6,19 @@ namespace ChiaRPC.Clients
     public interface IExtendedNodeRPCClient : INodeRPCClient
     {
         /// <summary>
-        /// Converts the a launcherId to a P2Singleton Puzzle Hash.
+        /// Converts the launcherId to a P2Singleton Puzzle Hash.
         /// </summary>
         /// <param name="launcherId"></param>
         /// <returns></returns>
-        Task<HexBytes> GetPayToSingletonPuzzleHashFromLauncherIdAsync(HexBytes launcherId);
+        Task<HexBytes> GetPayToSingletonPuzzleHashFromLauncherIdAsync(HexBytes launcherId, ulong delayTime, HexBytes delayedPuzzleHash);
+
+        /// <summary>
+        /// Converts the launcherId to a P2Singleton Puzzle Hash.
+        /// </summary>
+        /// <param name="launcherId"></param>
+        /// <param name="delayedPuzzleInfo"></param>
+        /// <returns></returns>
+        Task<HexBytes> GetPayToSingletonPuzzleHashFromLauncherIdAsync(HexBytes launcherId, DelayedPuzzleInfo delayedPuzzleInfo);
 
         /// <summary>
         /// Verifies the aggregate signature of a payload.

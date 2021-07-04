@@ -80,11 +80,24 @@ namespace ChiaRPC.Clients
             throw new System.NotImplementedException();
         }
 
-        async Task<HexBytes> IExtendedNodeRPCClient.GetPayToSingletonPuzzleHashFromLauncherIdAsync(HexBytes launcherId)
+        async Task<HexBytes> IExtendedNodeRPCClient.GetPayToSingletonPuzzleHashFromLauncherIdAsync(HexBytes launcherId, ulong seconds, HexBytes delayedPuzzleHash)
         {
             var result = await PostAsync<GetPayToSingletonPuzzleHashFromLauncherIdResult>(FullNodeRoutes.GetPayToSingletonPuzzleHashFromLauncherId(), new Dictionary<string, string>()
             {
                 ["launcher_id"] = launcherId.Hex,
+                ["seconds"] = $"{seconds}",
+                ["delayed_puzzle_hash"] = delayedPuzzleHash.Hex
+            });
+            return result.PayToSingletonPuzzleHash;
+        }
+
+        async Task<HexBytes> IExtendedNodeRPCClient.GetPayToSingletonPuzzleHashFromLauncherIdAsync(HexBytes launcherId, DelayedPuzzleInfo delayedPuzzleInfo)
+        {
+            var result = await PostAsync<GetPayToSingletonPuzzleHashFromLauncherIdResult>(FullNodeRoutes.GetPayToSingletonPuzzleHashFromLauncherId(), new Dictionary<string, string>()
+            {
+                ["launcher_id"] = launcherId.Hex,
+                ["seconds"] = $"{delayedPuzzleInfo.Seconds}",
+                ["delayed_puzzle_hash"] = delayedPuzzleInfo.DelayedPuzzleHash.Hex
             });
             return result.PayToSingletonPuzzleHash;
         }
