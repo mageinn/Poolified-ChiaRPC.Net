@@ -4,11 +4,11 @@ namespace ChiaRPC.Models
 {
     public sealed class CoinSolution
     {
-        [JsonPropertyName("name")]
+        [JsonPropertyName("coin")]
         public Coin Coin { get; init; }
 
         [JsonPropertyName("puzzle_reveal")]
-        public SerializedProgram Puzzle_Reveal { get; init; }
+        public SerializedProgram PuzzleReveal { get; init; }
 
         [JsonPropertyName("solution")]
         public SerializedProgram Solution { get; init; }

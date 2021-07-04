@@ -39,5 +39,12 @@ namespace ChiaRPC.Clients
         /// <param name="proof"></param>
         /// <returns></returns>
         Task<ProofQuality> GetProofQualityAsync(ProofOfSpace proof);
+
+        /// <summary>
+        /// Retrieves the delayed puzzle info from the launcher spend.
+        /// </summary>
+        /// <param name="coinSolution"></param>
+        /// <returns></returns>
+        Task<DelayedPuzzleInfo> GetDelayedPuzzleInfoFromLauncherSpendAsync(CoinSolution coinSolution);
     }
 }

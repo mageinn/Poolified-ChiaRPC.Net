@@ -7,6 +7,8 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ChiaRPC.Clients
@@ -69,7 +71,7 @@ namespace ChiaRPC.Clients
             return result.Connections;
         }
 
-        internal async Task<T> PostAsync<T>(Uri requestUri, Dictionary<string, string> parameters = null, bool throwOnError = true) where T : ChiaResult
+        protected async Task<T> PostAsyncRaw<T>(Uri requestUri, object parameters = null, bool throwOnError = true) where T : ChiaResult
         {
             using var request = new HttpRequestMessage(HttpMethod.Post, new Uri(ApiUrl, requestUri))
             {
@@ -89,6 +91,9 @@ namespace ChiaRPC.Clients
                 ? default
                 : result;
         }
+
+        protected Task<T> PostAsync<T>(Uri requestUri, Dictionary<string, string> parameters = null, bool throwOnError = true) where T : ChiaResult
+            => PostAsyncRaw<T>(requestUri, parameters, throwOnError);
 
         protected Task PostAsync(Uri requestUri, Dictionary<string, string> parameters = null)
             => PostAsync<ChiaResult>(requestUri, parameters);
