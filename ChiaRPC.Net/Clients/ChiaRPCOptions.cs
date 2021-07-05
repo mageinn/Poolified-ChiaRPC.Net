@@ -14,14 +14,7 @@ namespace ChiaRPC.Clients
 
         public ChiaRPCOptions()
         {
-            if (OperatingSystem.IsWindows())
-            {
-                SslCertificateDirectory = "%userprofile%\\.chia\\mainnet\\config\\ssl";
-            }
-            if (OperatingSystem.IsLinux())
-            {
-                SslCertificateDirectory = "/root/.chia/mainnet/config/ssl";
-            }
+            SslCertificateDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "/.chia/mainnet/config/ssl";
         }
     }
 }
