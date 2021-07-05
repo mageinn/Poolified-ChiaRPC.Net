@@ -76,9 +76,7 @@ namespace ChiaRPC.Clients
         }
 
         public Task<CoinSolution> GetPuzzleAndSolution(CoinRecord coinRecord)
-        {
-            throw new System.NotImplementedException();
-        }
+            => GetPuzzleAndSolution(coinRecord.Name(), coinRecord.SpentBlockIndex);
 
         async Task<HexBytes> IExtendedNodeRPCClient.GetPayToSingletonPuzzleHashFromLauncherIdAsync(HexBytes launcherId, ulong seconds, HexBytes delayedPuzzleHash)
         {
