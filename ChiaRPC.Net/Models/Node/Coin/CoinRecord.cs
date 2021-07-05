@@ -22,7 +22,7 @@ namespace ChiaRPC.Models
         public bool CoinBase { get; init; }
 
         [JsonPropertyName("timestamp")]
-        [JsonConverter(typeof(JsonDateTimeOffsetConverter))]
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
         public DateTimeOffset Timestamp { get; init; }
 
         public HexBytes Name()

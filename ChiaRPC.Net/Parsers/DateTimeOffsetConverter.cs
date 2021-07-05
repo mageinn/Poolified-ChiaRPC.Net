@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Parsers
 {
-    public sealed class JsonDateTimeOffsetConverter : JsonConverter<DateTimeOffset>
+    public sealed class DateTimeOffsetConverter : JsonConverter<DateTimeOffset>
     {
         public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {

@@ -11,7 +11,7 @@ namespace ChiaRPC.Results
         public EndOfSubSlotBundle EndOfSubSlotBundle { get; init; }
 
         [JsonPropertyName("time_received")]
-        [JsonConverter(typeof(JsonDateTimeOffsetConverter))]
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
         public DateTimeOffset ReceivedAt { get; init; }
 
         [JsonPropertyName("reverted")]

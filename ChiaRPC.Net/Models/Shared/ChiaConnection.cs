@@ -16,7 +16,7 @@ namespace ChiaRPC.Models
         public ulong BytesWritten { get; init; }
 
         [JsonPropertyName("peer_host")]
-        [JsonConverter(typeof(JsonIPAddressConverter))]
+        [JsonConverter(typeof(IPAddressConverter))]
         public IPAddress PeerHost { get; init; }
 
         [JsonPropertyName("peer_port")]

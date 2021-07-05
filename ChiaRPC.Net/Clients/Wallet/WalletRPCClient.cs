@@ -63,5 +63,71 @@ namespace ChiaRPC.Clients
 
             return result.Wallets;
         }
+
+        /// <summary>
+        /// Gets the sync status of the wallet.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<SyncStatus> GetSyncStatusAsync()
+        {
+            var result = await PostAsync<GetSyncStatusResult>(WalletRoutes.GetSyncStatus());
+
+            return new SyncStatus(result.Synced, result.Syncing, result.GenesisInitialized);
+        }
+
+        /// <summary>
+        /// Sends a standard transaction to a target puzzle_hash.
+        /// </summary>
+        /// <param name="walletId">The id of the wallet to take funds from</param>
+        /// <param name="amount">The amount of mojo to send</param>
+        /// <param name="fee">The amount of mojo used as fee</param>
+        /// <param name="targetAddress"></param>
+        /// <returns>A record representing the transaction. The transaction id is stored in the name property.</returns>
+        public async Task<TransactionRecord> SendTransactionAsync(uint walletId, ulong amount, ulong fee, HexBytes targetAddress)
+        {
+            var result = await PostAsync<TransactionResult>(WalletRoutes.SendTransaction(), new Dictionary<string, string>()
+            {
+                ["wallet_id"] = $"{walletId}",
+                ["amount"] = $"{amount}",
+                ["fee"] = $"{fee}",
+                ["address"] = targetAddress.Hex,
+            });
+
+            return result.Transaction;
+        }
+
+        /// <summary>
+        /// Gets a transaction record by transaction id
+        /// </summary>
+        /// <param name="transactionId"></param>
+        /// <returns></returns>
+        public async Task<TransactionRecord> GetTransactionAsync(HexBytes transactionId)
+        {
+            var result = await PostAsync<TransactionResult>(WalletRoutes.GetTransaction(), new Dictionary<string, string>()
+            {
+                ["transaction_id"] = transactionId.Hex,
+            });
+
+            return result.Transaction;
+        }
+
+        /// <summary>
+        /// Gets transaction records for a walletId.
+        /// </summary>
+        /// <param name="walletId"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public async Task<TransactionRecord[]> GetTransactionsAsync(uint walletId, uint start = 0, uint end = 50)
+        {
+            var result = await PostAsync<GetTransactionsResult>(WalletRoutes.GetTransactions(), new Dictionary<string, string>()
+            {
+                ["wallet_id"] = $"{walletId}",
+                ["start"] = $"{start}",
+                ["end"] = $"{end}",
+            });
+
+            return result.Transactions;
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace ChiaRPC.Models
         public BlockRecord Peak { get; init; }
 
         [JsonPropertyName("space")]
-        [JsonConverter(typeof(JsonBigIntegerConverter))]
+        [JsonConverter(typeof(BigIntegerConverter))]
         public BigInteger Space { get; init; }
 
         [JsonPropertyName("sync")]

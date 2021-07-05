@@ -7,7 +7,7 @@ namespace ChiaRPC.Models
     public abstract class RecentProvable
     {
         [JsonPropertyName("time_received")]
-        [JsonConverter(typeof(JsonDateTimeOffsetConverter))]
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
         public DateTimeOffset ReceivedAt { get; init; }
 
         [JsonPropertyName("reverted")]

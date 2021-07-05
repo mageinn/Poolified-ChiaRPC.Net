@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Parsers
 {
-    internal sealed class JsonIPAddressConverter : JsonConverter<IPAddress>
+    internal sealed class IPAddressConverter : JsonConverter<IPAddress>
     {
         public override IPAddress Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {

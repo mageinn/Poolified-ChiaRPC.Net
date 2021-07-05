@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Parsers
 {
-    internal sealed class JsonBigIntegerConverter : JsonConverter<BigInteger>
+    internal sealed class BigIntegerConverter : JsonConverter<BigInteger>
     {
         public override BigInteger Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {

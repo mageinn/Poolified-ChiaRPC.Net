@@ -15,5 +15,17 @@ namespace ChiaRPC.Routes
 
         public static Uri GetWallets()
             => new Uri("get_wallets", UriKind.Relative);
+
+        public static Uri GetSyncStatus()
+            => new Uri("get_sync_status", UriKind.Relative);
+
+        public static Uri SendTransaction()
+            => new Uri("send_transaction", UriKind.Relative);
+
+        public static Uri GetTransaction()
+            => new Uri("get_transaction", UriKind.Relative);
+
+        public static Uri GetTransactions()
+            => new Uri("get_transactions", UriKind.Relative);
     }
 }
