@@ -22,7 +22,7 @@ https://www.nuget.org/packages/ChiaRPC/
 - If required change the default settings with the parameters in those methods or use `ConfigureChiaRPC` to change the certificate path
 
 <b>Note: <br>
-Instead of using the ServiceCollection you can always just create instead of the client types yourself.</b>
+Instead of using the ServiceCollection you can always just create the clients yourself with `new`.</b>
 
 
 ## Warning
