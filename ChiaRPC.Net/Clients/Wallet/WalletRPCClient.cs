@@ -17,7 +17,7 @@ namespace ChiaRPC.Clients
         /// Retrieves balances for a wallet.
         /// </summary>
         /// <returns></returns>
-        public async Task<Wallet> GetWalletBalance(int walletId)
+        public async Task<Wallet> GetWalletBalance(uint walletId)
         {
             var result = await PostAsync<GetWalletBalanceResult>(WalletRoutes.GetWalletBalance(), new Dictionary<string, string>()
             {
@@ -30,7 +30,7 @@ namespace ChiaRPC.Clients
         /// Retrieves the address of the wallet at the given id for the current key.
         /// </summary>
         /// <returns></returns>
-        public async Task<string> GetWalletAddressAsync(int walletId, bool generateAddress)
+        public async Task<string> GetWalletAddressAsync(uint walletId, bool generateAddress)
         {
             var result = await PostAsync<GetWalletAddressResult>(WalletRoutes.GetWalletAddress(), new Dictionary<string, string>()
             {

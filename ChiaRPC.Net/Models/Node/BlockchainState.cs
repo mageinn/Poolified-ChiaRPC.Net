@@ -7,7 +7,7 @@ namespace ChiaRPC.Models
     public sealed class BlockchainState
     {
         [JsonPropertyName("difficulty")]
-        public int Difficulty { get; init; }
+        public ulong Difficulty { get; init; }
 
         [JsonPropertyName("genesis_challenge_initialized")]
         public bool GenesisChallengeInitiated { get; init; }

@@ -1,15 +1,17 @@
-﻿using System.Text.Json.Serialization;
+﻿using ChiaRPC.Parsers;
+using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Models
 {
     public sealed class BlockRecord
     {
         [JsonPropertyName("header_hash")]
-        public string HeaderHash { get; init; }
+        [JsonConverter(typeof(HexBytesConverter))]
+        public HexBytes HeaderHash { get; init; }
         [JsonPropertyName("height")]
-        public long Height { get; init; }
+        public ulong Height { get; init; }
         [JsonPropertyName("weight")]
-        public long Weight { get; init; }
+        public ulong Weight { get; init; }
 
         [JsonConstructor]
         public BlockRecord()

@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using ChiaRPC.Parsers;
+using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Models
 {
@@ -14,10 +15,11 @@ namespace ChiaRPC.Models
         public string FileName { get; set; }
 
         [JsonPropertyName("plot_public_key")]
-        public string PublicKey { get; set; }
+        [JsonConverter(typeof(HexBytesConverter))]
+        public HexBytes PublicKey { get; set; }
 
         [JsonPropertyName("size")]
-        public int Size { get; set; }
+        public uint Size { get; set; }
 
         [JsonConstructor]
         public Plot()

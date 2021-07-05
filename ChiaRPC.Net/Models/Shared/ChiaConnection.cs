@@ -10,10 +10,10 @@ namespace ChiaRPC.Models
         public string NodeId { get; init; }
 
         [JsonPropertyName("bytes_read")]
-        public int BytesRead { get; init; }
+        public ulong BytesRead { get; init; }
 
         [JsonPropertyName("bytes_written")]
-        public int BytesWritten { get; init; }
+        public ulong BytesWritten { get; init; }
 
         [JsonPropertyName("peer_host")]
         [JsonConverter(typeof(JsonIPAddressConverter))]

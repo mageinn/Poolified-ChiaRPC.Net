@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using ChiaRPC.Parsers;
+using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Models
 {
@@ -7,7 +8,8 @@ namespace ChiaRPC.Models
         [JsonPropertyName("farmer_reward_puzzle_hash")]
         public string FarmerRewardPuzzleHash { get; init; }
         [JsonPropertyName("pool_signature")]
-        public string PoolSignature { get; init; }
+        [JsonConverter(typeof(HexBytesConverter))]
+        public HexBytes PoolSignature { get; init; }
         [JsonPropertyName("pool_target")]
         public PoolTarget PoolTarget { get; init; }
 

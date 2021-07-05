@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using ChiaRPC.Parsers;
+using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Models
 {
@@ -8,7 +9,8 @@ namespace ChiaRPC.Models
         public long MaxHeight { get; init; }
 
         [JsonPropertyName("puzzle_hash")]
-        public string PuzzleHash { get; init; }
+        [JsonConverter(typeof(HexBytesConverter))]
+        public HexBytes PuzzleHash { get; init; }
 
         [JsonConstructor]
         public PoolTarget()

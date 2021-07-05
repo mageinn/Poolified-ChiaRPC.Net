@@ -22,7 +22,8 @@ namespace ChiaRPC.Models
         public HexBytes PoolContractPuzzleHash { get; init; }
 
         [JsonPropertyName("proof")]
-        public string Proof { get; init; }
+        [JsonConverter(typeof(HexBytesConverter))]
+        public HexBytes Proof { get; init; }
 
         [JsonPropertyName("size")]
         public ushort Size { get; init; }
@@ -38,7 +39,7 @@ namespace ChiaRPC.Models
             {
                 return HexBytes.Empty;
             }
-
+            //
             return PoolPublicKey.IsEmpty
                 ? GetPlotIdByPuzzleHash()
                 : GetPlotIdByPublicKey();

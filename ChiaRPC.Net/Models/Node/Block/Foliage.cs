@@ -1,15 +1,18 @@
-﻿using System.Text.Json.Serialization;
+﻿using ChiaRPC.Parsers;
+using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Models
 {
     public sealed class Foliage
     {
         [JsonPropertyName("foliage_block_data_signature")]
-        public string BlockDataSignature { get; init; }
+        [JsonConverter(typeof(HexBytesConverter))]
+        public HexBytes BlockDataSignature { get; init; }
         [JsonPropertyName("foliage_block_data")]
         public BlockData BlockData { get; init; }
         [JsonPropertyName("reward_block_hash")]
-        public string RewardBlockHash { get; init; }
+        [JsonConverter(typeof(HexBytesConverter))]
+        public HexBytes RewardBlockHash { get; init; }
 
         [JsonConstructor]
         public Foliage()

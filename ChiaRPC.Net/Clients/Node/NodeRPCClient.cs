@@ -28,7 +28,7 @@ namespace ChiaRPC.Clients
             return result.Block;
         }
 
-        public async Task<Block[]> GetBlocksAsync(int startHeight, int endHeight)
+        public async Task<Block[]> GetBlocksAsync(uint startHeight, uint endHeight)
         {
             var result = await PostAsync<GetBlocksResult>(FullNodeRoutes.GetBlocks(), new Dictionary<string, string>()
             {
@@ -94,8 +94,8 @@ namespace ChiaRPC.Clients
             var result = await PostAsync<GetPayToSingletonPuzzleHashFromLauncherIdResult>(FullNodeRoutes.GetPayToSingletonPuzzleHashFromLauncherId(), new Dictionary<string, string>()
             {
                 ["launcher_id"] = launcherId.Hex,
-                ["seconds"] = $"{delayedPuzzleInfo.Seconds}",
-                ["delayed_puzzle_hash"] = delayedPuzzleInfo.DelayedPuzzleHash.Hex
+                ["seconds"] = $"{delayedPuzzleInfo.DelaySeconds}",
+                ["delayed_puzzle_hash"] = delayedPuzzleInfo.DelayPuzzleHash.Hex
             });
             return result.PayToSingletonPuzzleHash;
         }
@@ -133,7 +133,7 @@ namespace ChiaRPC.Clients
                 ["plot_id"] = proof.GetPlotId().Hex,
                 ["size"] = $"{proof.Size}",
                 ["challenge"] = proof.Challenge.Hex,
-                ["proof"] = proof.Proof
+                ["proof"] = proof.Proof.Hex
             });
             return result.Valid
                 ? new ProofQuality(true, result.QualityString)

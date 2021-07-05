@@ -24,7 +24,7 @@ namespace ChiaRPC.Clients
         /// <param name="startHeight"></param>
         /// <param name="endHeight"></param>
         /// <returns></returns>
-        Task<Block[]> GetBlocksAsync(int startHeight, int endHeight);
+        Task<Block[]> GetBlocksAsync(uint startHeight, uint endHeight);
 
         /// <summary>
         /// Gets a recent EndOfSubSlotBundle.

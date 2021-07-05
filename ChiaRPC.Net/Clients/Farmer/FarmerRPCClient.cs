@@ -1,4 +1,5 @@
-﻿using ChiaRPC.Routes;
+﻿using ChiaRPC.Models;
+using ChiaRPC.Routes;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -16,11 +17,11 @@ namespace ChiaRPC.Clients
         /// </summary>
         /// <param name="targetAddress"></param>
         /// <returns></returns>
-        public async Task SetRewardTargets(string targetAddress)
+        public async Task SetRewardTargets(HexBytes farmerTarget, HexBytes poolTarget)
             => await PostAsync(FarmerRoutes.SetRewardTargets(), new Dictionary<string, string>()
             {
-                ["farmer_target"] = targetAddress,
-                ["pool_target"] = targetAddress,
+                ["farmer_target"] = farmerTarget.Hex,
+                ["pool_target"] = poolTarget.Hex,
             });
     }
 }

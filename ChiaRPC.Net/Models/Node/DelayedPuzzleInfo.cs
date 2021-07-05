@@ -2,13 +2,13 @@
 {
     public sealed class DelayedPuzzleInfo
     {
-        public ulong Seconds { get; init; }
-        public HexBytes DelayedPuzzleHash { get; init; }
+        public ulong DelaySeconds { get; init; }
+        public HexBytes DelayPuzzleHash { get; init; }
 
-        public DelayedPuzzleInfo(ulong seconds, HexBytes delayedPuzzleHash)
+        public DelayedPuzzleInfo(ulong delaySeconds, HexBytes delayPuzzleHash)
         {
-            Seconds = seconds;
-            DelayedPuzzleHash = delayedPuzzleHash;
+            DelaySeconds = delaySeconds;
+            DelayPuzzleHash = delayPuzzleHash;
         }
     }
 }

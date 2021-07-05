@@ -10,7 +10,7 @@ namespace ChiaRPC.Models
         public HexBytes Challenge { get; init; }
 
         [JsonPropertyName("number_of_iterations")]
-        public long Iterations { get; init; }
+        public ulong Iterations { get; init; }
 
         [JsonPropertyName("output")]
         public ClassgroupElement Output { get; init; }
