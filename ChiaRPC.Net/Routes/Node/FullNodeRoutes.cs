@@ -39,5 +39,8 @@ namespace ChiaRPC.Routes
 
         public static Uri ValidatePuzzleHash()
             => new Uri("validate_puzzle_hash", UriKind.Relative);
+
+        public static Uri GetPoolStateFromSingletonCoinSpend()
+            => new Uri("get_pool_state_from_coin_spend", UriKind.Relative);
     }
 }

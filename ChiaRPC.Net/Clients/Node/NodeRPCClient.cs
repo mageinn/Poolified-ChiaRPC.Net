@@ -174,5 +174,14 @@ namespace ChiaRPC.Clients
 
             return result.Valid;
         }
+
+        async Task<PoolState> IExtendedNodeRPCClient.GetPoolStateFromSingletonCoinSpend(CoinSolution coinSolution)
+        {
+            var result = await PostAsyncRaw<PoolStateResult>(FullNodeRoutes.GetPoolStateFromSingletonCoinSpend(), coinSolution);
+
+            return result.HasValue
+                ? result.PoolState
+                : null;
+        }
     }
 }
