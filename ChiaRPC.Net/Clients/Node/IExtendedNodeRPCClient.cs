@@ -54,5 +54,7 @@ namespace ChiaRPC.Clients
         /// <param name="coinSolution"></param>
         /// <returns></returns>
         Task<DelayedPuzzleInfo> GetDelayedPuzzleInfoFromLauncherSpendAsync(CoinSolution coinSolution);
+
+        Task<bool> ValidatePuzzleHashAsync(HexBytes launcherId, HexBytes delayPuzzleHash, ulong delayTime, PoolState poolState, HexBytes outerPuzzleHash, HexBytes genesisChallenge);
     }
 }

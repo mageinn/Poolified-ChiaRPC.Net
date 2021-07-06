@@ -16,6 +16,7 @@ namespace ChiaRPC.Clients
         public async Task<BlockchainState> GetBlockchainStateAsync()
         {
             var result = await PostAsync<GetBlockchainStateResult>(FullNodeRoutes.GetBlockchainState());
+
             return result.BlockchainState;
         }
 
@@ -25,6 +26,7 @@ namespace ChiaRPC.Clients
             {
                 ["header_hash"] = headerHash.Hex,
             });
+
             return result.Block;
         }
 
@@ -35,6 +37,7 @@ namespace ChiaRPC.Clients
                 ["start"] = $"{startHeight}",
                 ["end"] = $"{endHeight}",
             });
+
             return result.Blocks;
         }
 
@@ -44,6 +47,7 @@ namespace ChiaRPC.Clients
             {
                 ["challenge_hash"] = challengeHash.Hex
             });
+
             return new RecentEndOfSubSlotBundle(result.EndOfSubSlotBundle, result.ReceivedAt, result.Reverted);
         }
 
@@ -53,6 +57,7 @@ namespace ChiaRPC.Clients
             {
                 ["sp_hash"] = signagePointHash.Hex
             });
+
             return new RecentSignagePoint(result.SignagePoint, result.ReceivedAt, result.Reverted);
         }
 
@@ -72,6 +77,7 @@ namespace ChiaRPC.Clients
                 ["coin_id"] = $"{coinId}",
                 ["height"] = $"{height}",
             });
+
             return result.CoinSolution;
         }
 
@@ -86,6 +92,7 @@ namespace ChiaRPC.Clients
                 ["seconds"] = $"{seconds}",
                 ["delayed_puzzle_hash"] = delayedPuzzleHash.Hex
             });
+
             return result.PayToSingletonPuzzleHash;
         }
 
@@ -97,12 +104,13 @@ namespace ChiaRPC.Clients
                 ["seconds"] = $"{delayedPuzzleInfo.DelaySeconds}",
                 ["delayed_puzzle_hash"] = delayedPuzzleInfo.DelayPuzzleHash.Hex
             });
+
             return result.PayToSingletonPuzzleHash;
         }
 
         async Task<bool> IExtendedNodeRPCClient.AggregateVerifySignatureAsync(HexBytes ownerPk, HexBytes plotPk, HexBytes authPk, HexBytes serializedAuthenticationKeyInfo, HexBytes payloadHash, HexBytes signature)
         {
-            var result = await PostAsync<VerifyResult>(FullNodeRoutes.AggregateVerifySignature(), new Dictionary<string, string>()
+            var result = await PostAsync<ValidationResult>(FullNodeRoutes.AggregateVerifySignature(), new Dictionary<string, string>()
             {
                 ["owner_pk"] = $"{ownerPk}",
                 ["plot_public_key"] = $"{plotPk}",
@@ -111,19 +119,20 @@ namespace ChiaRPC.Clients
                 ["payload_hash"] = $"{payloadHash}",
                 ["signature"] = $"{signature}"
             });
-            return result.ValidSignature;
+
+            return result.Valid;
         }
 
         async Task<bool> IExtendedNodeRPCClient.VerifySignatureAsync(HexBytes ownerPk, HexBytes payloadHash, HexBytes signature)
         {
-            var result = await PostAsync<VerifyResult>(FullNodeRoutes.VerifySignature(), new Dictionary<string, string>()
+            var result = await PostAsync<ValidationResult>(FullNodeRoutes.VerifySignature(), new Dictionary<string, string>()
             {
                 ["owner_pk"] = $"{ownerPk}",
                 ["payload_hash"] = $"{payloadHash}",
                 ["signature"] = $"{signature}",
             });
 
-            return result.ValidSignature;
+            return result.Valid;
         }
 
         async Task<ProofQuality> IExtendedNodeRPCClient.GetProofQualityAsync(ProofOfSpace proof)
@@ -135,6 +144,7 @@ namespace ChiaRPC.Clients
                 ["challenge"] = proof.Challenge.Hex,
                 ["proof"] = proof.Proof.Hex
             });
+
             return result.Valid
                 ? new ProofQuality(true, result.QualityString)
                 : new ProofQuality(false, HexBytes.Empty);
@@ -147,7 +157,22 @@ namespace ChiaRPC.Clients
             return new DelayedPuzzleInfo(
                 result.Seconds,
                 result.DelayedPuzzleHash
-                );
+            );
+        }
+
+        async Task<bool> IExtendedNodeRPCClient.ValidatePuzzleHashAsync(HexBytes launcherId, HexBytes delayPuzzleHash, ulong delayTime, PoolState poolState, HexBytes outerPuzzleHash, HexBytes genesisChallenge)
+        {
+            var result = await PostAsyncRaw<ValidationResult>(FullNodeRoutes.ValidatePuzzleHash(), new Dictionary<string, object>()
+            {
+                ["launcher_id"] = launcherId.Hex,
+                ["delay_ph"] = delayPuzzleHash.Hex,
+                ["delay_time"] = $"{delayTime}",
+                ["pool_state"] = poolState,
+                ["outer_puzzle_hash"] = outerPuzzleHash.Hex,
+                ["genesis_challenge"] = genesisChallenge.Hex
+            });
+
+            return result.Valid;
         }
     }
 }

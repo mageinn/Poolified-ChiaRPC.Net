@@ -2,12 +2,12 @@
 
 namespace ChiaRPC.Results
 {
-    internal sealed class VerifyResult : ChiaResult
+    internal sealed class ValidationResult : ChiaResult
     {
         [JsonPropertyName("valid")] 
-        public bool ValidSignature { get; init; }
+        public bool Valid { get; init; }
 
-        public VerifyResult()
+        public ValidationResult()
         {
         }
     }
