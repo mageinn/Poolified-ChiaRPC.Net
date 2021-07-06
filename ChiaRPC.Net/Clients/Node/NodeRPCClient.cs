@@ -160,27 +160,38 @@ namespace ChiaRPC.Clients
             );
         }
 
-        async Task<bool> IExtendedNodeRPCClient.ValidatePuzzleHashAsync(HexBytes launcherId, HexBytes delayPuzzleHash, ulong delayTime, PoolState poolState, HexBytes outerPuzzleHash, HexBytes genesisChallenge)
-        {
-            var result = await PostAsyncRaw<ValidationResult>(FullNodeRoutes.ValidatePuzzleHash(), new Dictionary<string, object>()
-            {
-                ["launcher_id"] = launcherId.Hex,
-                ["delay_ph"] = delayPuzzleHash.Hex,
-                ["delay_time"] = $"{delayTime}",
-                ["pool_state"] = poolState,
-                ["outer_puzzle_hash"] = outerPuzzleHash.Hex,
-                ["genesis_challenge"] = genesisChallenge.Hex
-            });
-
-            return result.Valid;
-        }
-
-        async Task<PoolState> IExtendedNodeRPCClient.GetPoolStateFromSingletonCoinSpend(CoinSolution coinSolution)
+        async Task<PoolState> IExtendedNodeRPCClient.GetPoolStateFromSingletonCoinSpendAsync(CoinSolution coinSolution)
         {
             var result = await PostAsyncRaw<PoolStateResult>(FullNodeRoutes.GetPoolStateFromSingletonCoinSpend(), coinSolution);
 
             return result.HasValue
                 ? result.PoolState
+                : null;
+        }
+
+        async Task<SingletonState> IExtendedNodeRPCClient.GetSingletonStateAsync(HexBytes launcherId, uint confirmationSecurityThreshold, FarmerData farmerData)
+        {
+            bool hasFarmerData = farmerData != null;
+
+            var parameters = new Dictionary<string, object>()
+            {
+                ["launcher_id"] = launcherId.Hex,
+                ["confirmation_security_threshold"] = $"{confirmationSecurityThreshold}",
+                ["has_farmer_data"] = $"{hasFarmerData}",
+            };
+
+            if (hasFarmerData)
+            {
+                parameters.Add("singleton_tip", farmerData.LastSolution);
+                parameters.Add("singleton_tip_state", farmerData.SavedState);
+                parameters.Add("delay_time", farmerData.DelayTime);
+                parameters.Add("delay_puzzle_hash", farmerData.DelayPuzzleHash.Hex);
+            }
+
+            var result = await PostAsyncRaw<SingletonStateResult>(FullNodeRoutes.GetSingletonState(), parameters);
+
+            return result.HasValue 
+                ? result.SingletonState 
                 : null;
         }
     }

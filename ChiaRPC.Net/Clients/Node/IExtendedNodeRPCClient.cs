@@ -55,13 +55,20 @@ namespace ChiaRPC.Clients
         /// <returns></returns>
         Task<DelayedPuzzleInfo> GetDelayedPuzzleInfoFromLauncherSpendAsync(CoinSolution coinSolution);
 
-        Task<bool> ValidatePuzzleHashAsync(HexBytes launcherId, HexBytes delayPuzzleHash, ulong delayTime, PoolState poolState, HexBytes outerPuzzleHash, HexBytes genesisChallenge);
-
         /// <summary>
         /// Gets the pool state from a singleton coin spend.
         /// </summary>
         /// <param name="coinSolution"></param>
         /// <returns></returns>
-        Task<PoolState> GetPoolStateFromSingletonCoinSpend(CoinSolution coinSolution);
+        Task<PoolState> GetPoolStateFromSingletonCoinSpendAsync(CoinSolution coinSolution);
+
+        /// <summary>
+        /// Gets the current state of a singleton in the blockchain.
+        /// </summary>
+        /// <param name="launcherId"></param>
+        /// <param name="confirmationSecurityThreshold"></param>
+        /// <param name="farmerData"></param>
+        /// <returns></returns>
+        Task<SingletonState> GetSingletonStateAsync(HexBytes launcherId, uint confirmationSecurityThreshold, FarmerData farmerData = null);
     }
 }
