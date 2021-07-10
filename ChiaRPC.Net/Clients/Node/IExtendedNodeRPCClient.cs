@@ -23,14 +23,12 @@ namespace ChiaRPC.Clients
         /// <summary>
         /// Verifies the aggregate signature of a payload.
         /// </summary>
-        /// <param name="ownerPk"></param>
         /// <param name="plotPk"></param>
-        /// <param name="authPk"></param>
-        /// <param name="serializedAuthenticationKeyInfo"></param>
+        /// <param name="ownerPk"></param>
         /// <param name="payloadHash"></param>
         /// <param name="signature"></param>
         /// <returns></returns>
-        Task<bool> AggregateVerifySignatureAsync(HexBytes ownerPk, HexBytes plotPk, HexBytes authPk, HexBytes serializedAuthenticationKeyInfo, HexBytes payloadHash, HexBytes signature);
+        Task<bool> AggregateVerifySignatureAsync(HexBytes plotPk, HexBytes ownerPk, HexBytes payloadHash, HexBytes signature);
 
         /// <summary>
         /// Verfifies the signature of a payload.
