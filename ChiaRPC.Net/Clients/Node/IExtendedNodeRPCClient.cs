@@ -70,5 +70,13 @@ namespace ChiaRPC.Clients
         /// <param name="farmerData"></param>
         /// <returns></returns>
         Task<SingletonState> GetSingletonStateAsync(HexBytes launcherId, uint confirmationSecurityThreshold, FarmerData farmerData = null);
+
+        /// <summary>
+        /// Checks if the confirmed spend height of the coinId is older than relativeLockHeight blocks.
+        /// </summary>
+        /// <param name="coinId"></param>
+        /// <param name="relativeLockHeight"></param>
+        /// <returns></returns>
+        Task<bool> CheckRelativeLockHeight(HexBytes coinId, uint relativeLockHeight);
     }
 }

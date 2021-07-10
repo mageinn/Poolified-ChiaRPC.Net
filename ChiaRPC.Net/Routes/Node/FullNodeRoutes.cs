@@ -42,5 +42,8 @@ namespace ChiaRPC.Routes
 
         public static Uri GetPoolStateFromSingletonCoinSpend()
             => new Uri("get_pool_state_from_coin_spend", UriKind.Relative);
+
+        public static Uri CheckRelativeLockHeight()
+            => new Uri("check_relative_lock_height", UriKind.Relative);
     }
 }

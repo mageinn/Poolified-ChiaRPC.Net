@@ -194,5 +194,16 @@ namespace ChiaRPC.Clients
                 ? result.SingletonState 
                 : null;
         }
+
+        async Task<bool> IExtendedNodeRPCClient.CheckRelativeLockHeight(HexBytes coinId, uint relativeLockHeight)
+        {
+            var result = await PostAsync<ValidationResult>(FullNodeRoutes.CheckRelativeLockHeight(), new Dictionary<string, string>()
+            {
+                ["coin_id"] = coinId.Hex,
+                ["relative_lock_height"] = $"{relativeLockHeight}"
+            });
+
+            return result.Valid;
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ChiaRPC.Models
 {
-    public enum PoolSingletonState
+    public enum PoolSingletonState : byte
     {
         SelfPooling = 1,
         LeavingPool = 2,
