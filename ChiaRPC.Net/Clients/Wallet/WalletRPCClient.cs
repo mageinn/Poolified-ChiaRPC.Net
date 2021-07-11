@@ -1,6 +1,7 @@
 ﻿using ChiaRPC.Models;
 using ChiaRPC.Results;
 using ChiaRPC.Routes;
+using ChiaRPC.Util;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -81,19 +82,33 @@ namespace ChiaRPC.Clients
         /// <param name="walletId">The id of the wallet to take funds from</param>
         /// <param name="amount">The amount of mojo to send</param>
         /// <param name="fee">The amount of mojo used as fee</param>
-        /// <param name="targetAddress"></param>
+        /// <param name="targetAddress">The address to send the funds to</param>
         /// <returns>A record representing the transaction. The transaction id is stored in the name property.</returns>
-        public async Task<TransactionRecord> SendTransactionAsync(uint walletId, ulong amount, ulong fee, HexBytes targetAddress)
+        public async Task<TransactionRecord> SendTransactionAsync(uint walletId, ulong amount, ulong fee, string targetAddress)
         {
             var result = await PostAsync<TransactionResult>(WalletRoutes.SendTransaction(), new Dictionary<string, string>()
             {
                 ["wallet_id"] = $"{walletId}",
                 ["amount"] = $"{amount}",
                 ["fee"] = $"{fee}",
-                ["address"] = targetAddress.Hex,
+                ["address"] = targetAddress,
             });
 
             return result.Transaction;
+        }
+
+        /// <summary>
+        /// Sends a standard transaction to a target puzzle_hash.
+        /// </summary>
+        /// <param name="walletId">The id of the wallet to take funds from</param>
+        /// <param name="amount">The amount of mojo to send</param>
+        /// <param name="fee">The amount of mojo used as fee</param>
+        /// <param name="targetPuzzleHash">The puzzle hash to send the funds to</param>
+        /// <returns></returns>
+        public Task<TransactionRecord> SendTransactionAsync(uint walletId, ulong amount, ulong fee, HexBytes targetPuzzleHash)
+        {
+            var address = Bech32M.PuzzleHashToAddress(targetPuzzleHash);
+            return SendTransactionAsync(walletId, amount, fee, address);
         }
 
         /// <summary>
