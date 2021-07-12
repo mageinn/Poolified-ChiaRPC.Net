@@ -155,9 +155,11 @@ namespace ChiaRPC.Clients
                 ["launcher_id"] = launcherId.Hex,
             });
 
-            return new DelayedPuzzleInfo(
-                result.Seconds,
-                result.DelayedPuzzleHash
+            return !result.HasValue
+                ? null
+                : new DelayedPuzzleInfo(
+                    result.Seconds,
+                    result.DelayedPuzzleHash
             );
         }
 

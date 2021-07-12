@@ -6,6 +6,9 @@ namespace ChiaRPC.Results
 {
     internal class GetDelayedPuzzleInfoFromLauncherSpendResult : ChiaResult
     {
+        [JsonPropertyName("has_value")]
+        public bool HasValue { get; init; }
+
         [JsonPropertyName("seconds")]
         public ulong Seconds { get; init; }
 
