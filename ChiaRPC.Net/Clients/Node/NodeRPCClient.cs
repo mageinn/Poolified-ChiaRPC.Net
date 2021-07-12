@@ -148,9 +148,12 @@ namespace ChiaRPC.Clients
                 : new ProofQuality(false, HexBytes.Empty);
         }
 
-        async Task<DelayedPuzzleInfo> IExtendedNodeRPCClient.GetDelayedPuzzleInfoFromLauncherSpendAsync(CoinSolution coinSolution)
+        async Task<DelayedPuzzleInfo> IExtendedNodeRPCClient.GetDelayedPuzzleInfoFromLauncherIdAsync(HexBytes launcherId)
         {
-            var result = await PostAsyncRaw<GetDelayedPuzzleInfoFromLauncherSpendResult>(FullNodeRoutes.GetDelayedPuzzleInfoFromLauncherSpend(), coinSolution);
+            var result = await PostAsync<GetDelayedPuzzleInfoFromLauncherSpendResult>(FullNodeRoutes.GetDelayedPuzzleInfoFromLauncherSpend(), new Dictionary<string, string>()
+            {
+                ["launcher_id"] = launcherId.Hex,
+            });
 
             return new DelayedPuzzleInfo(
                 result.Seconds,

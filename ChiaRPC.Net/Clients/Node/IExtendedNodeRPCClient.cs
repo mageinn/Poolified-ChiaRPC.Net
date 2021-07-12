@@ -51,7 +51,7 @@ namespace ChiaRPC.Clients
         /// </summary>
         /// <param name="coinSolution"></param>
         /// <returns></returns>
-        Task<DelayedPuzzleInfo> GetDelayedPuzzleInfoFromLauncherSpendAsync(CoinSolution coinSolution);
+        Task<DelayedPuzzleInfo> GetDelayedPuzzleInfoFromLauncherIdAsync(HexBytes launcherId);
 
         /// <summary>
         /// Gets the pool state from a singleton coin spend.

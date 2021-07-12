@@ -4,7 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>ChiaRPC</AssemblyName>
     <RootNamespace>ChiaRPC</RootNamespace>
-    <Version>1.0.0-dev19</Version>
+    <Version>1.0.0-dev20</Version>
     <Authors>Playwo</Authors>
     <Company />
     <Description>API Wrapper for the RPC interfaces exposed by the chia blockchain nodes</Description>
@@ -16,6 +16,10 @@
     <PackageTags>Chia</PackageTags>
     <NeutralLanguage>English</NeutralLanguage>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Clients\Node\NodeRPCClient.cs~RFe34530c.TMP" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="HexMate" Version="0.0.3" />
