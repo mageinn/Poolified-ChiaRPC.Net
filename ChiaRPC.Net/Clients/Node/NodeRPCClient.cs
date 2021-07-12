@@ -84,13 +84,13 @@ namespace ChiaRPC.Clients
         public Task<CoinSolution> GetPuzzleAndSolution(CoinRecord coinRecord)
             => GetPuzzleAndSolution(coinRecord.Name(), coinRecord.SpentBlockIndex);
 
-        async Task<HexBytes> IExtendedNodeRPCClient.GetPayToSingletonPuzzleHashFromLauncherIdAsync(HexBytes launcherId, ulong seconds, HexBytes delayedPuzzleHash)
+        async Task<HexBytes> IExtendedNodeRPCClient.GetPayToSingletonPuzzleHashFromLauncherIdAsync(HexBytes launcherId, ulong delayTime, HexBytes delayPuzzleHash)
         {
             var result = await PostAsync<GetPayToSingletonPuzzleHashFromLauncherIdResult>(FullNodeRoutes.GetPayToSingletonPuzzleHashFromLauncherId(), new Dictionary<string, string>()
             {
                 ["launcher_id"] = launcherId.Hex,
-                ["seconds"] = $"{seconds}",
-                ["delayed_puzzle_hash"] = delayedPuzzleHash.Hex
+                ["delay_time"] = $"{delayTime}",
+                ["delay_puzzle_hash"] = delayPuzzleHash.Hex
             });
 
             return result.PayToSingletonPuzzleHash;
@@ -101,8 +101,8 @@ namespace ChiaRPC.Clients
             var result = await PostAsync<GetPayToSingletonPuzzleHashFromLauncherIdResult>(FullNodeRoutes.GetPayToSingletonPuzzleHashFromLauncherId(), new Dictionary<string, string>()
             {
                 ["launcher_id"] = launcherId.Hex,
-                ["seconds"] = $"{delayedPuzzleInfo.DelaySeconds}",
-                ["delayed_puzzle_hash"] = delayedPuzzleInfo.DelayPuzzleHash.Hex
+                ["delay_time"] = $"{delayedPuzzleInfo.DelaySeconds}",
+                ["delay_puzzle_hash"] = delayedPuzzleInfo.DelayPuzzleHash.Hex
             });
 
             return result.PayToSingletonPuzzleHash;
