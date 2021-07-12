@@ -150,7 +150,7 @@ namespace ChiaRPC.Clients
 
         async Task<DelayedPuzzleInfo> IExtendedNodeRPCClient.GetDelayedPuzzleInfoFromLauncherIdAsync(HexBytes launcherId)
         {
-            var result = await PostAsync<GetDelayedPuzzleInfoFromLauncherSpendResult>(FullNodeRoutes.GetDelayedPuzzleInfoFromLauncherSpend(), new Dictionary<string, string>()
+            var result = await PostAsync<GetDelayedPuzzleInfoFromLauncherSpendResult>(FullNodeRoutes.GetDelayedPuzzleInfoFromLauncherId(), new Dictionary<string, string>()
             {
                 ["launcher_id"] = launcherId.Hex,
             });
