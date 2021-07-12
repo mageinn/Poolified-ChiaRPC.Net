@@ -21,7 +21,5 @@ namespace ChiaRPC.Models
         protected RecentProvable()
         {
         }
-
-        public abstract HexBytes GetChallengeHash();
     }
 }
