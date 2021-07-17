@@ -33,27 +33,20 @@ namespace ChiaRPC.Models
         {
         }
 
-        public HexBytes GetPlotId()
-        {
-            if (PoolPublicKey.IsEmpty == PoolContractPuzzleHash.IsEmpty)
-            {
-                return HexBytes.Empty;
-            }
-            //
-            return PoolPublicKey.IsEmpty
-                ? GetPlotIdByPuzzleHash()
-                : GetPlotIdByPublicKey();
-        }
+        public bool TryGetPlotId(out HexBytes plotId)
+            => TryGetPlotId(PoolPublicKey, PoolContractPuzzleHash, PlotPublicKey, out plotId);
 
-        private HexBytes GetPlotIdByPuzzleHash()
+        public static bool TryGetPlotId(HexBytes poolPublicKey, HexBytes poolContractPuzzleHash, HexBytes plotPublicKey, out HexBytes plotId)
         {
-            var concatenated = PoolContractPuzzleHash + PlotPublicKey;
-            return concatenated.Sha256();
-        }
-        private HexBytes GetPlotIdByPublicKey()
-        {
-            var concatenated = PoolPublicKey + PlotPublicKey;
-            return concatenated.Sha256();
+            if (poolPublicKey.IsEmpty == poolContractPuzzleHash.IsEmpty)
+            {
+                plotId = HexBytes.Empty;
+                return false;
+            }
+
+            var concatenated = poolPublicKey + poolContractPuzzleHash + plotPublicKey;
+            plotId = concatenated.Sha256();
+            return true;
         }
     }
 }
