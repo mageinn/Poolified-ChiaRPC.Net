@@ -5,7 +5,7 @@
         public bool Valid { get; init; }
         public HexBytes QualityString { get; init; }
 
-        internal ProofQuality(bool valid, HexBytes qualityString)
+        public ProofQuality(bool valid, HexBytes qualityString)
         {
             Valid = valid;
             QualityString = qualityString;
