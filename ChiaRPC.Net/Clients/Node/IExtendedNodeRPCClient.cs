@@ -44,7 +44,7 @@ namespace ChiaRPC.Clients
         /// </summary>
         /// <param name="proof"></param>
         /// <returns></returns>
-        Task<ProofQuality> GetProofQualityAsync(ProofOfSpace proof);
+        Task<ProofQuality> GetProofQualityAsync(HexBytes plotId, int size, HexBytes posChallenge, HexBytes proof);
 
         /// <summary>
         /// Retrieves the delayed puzzle info from the launcher spend.

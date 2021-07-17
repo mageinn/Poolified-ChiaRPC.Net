@@ -133,14 +133,14 @@ namespace ChiaRPC.Clients
             return result.Valid;
         }
 
-        async Task<ProofQuality> IExtendedNodeRPCClient.GetProofQualityAsync(ProofOfSpace proof)
+        async Task<ProofQuality> IExtendedNodeRPCClient.GetProofQualityAsync(HexBytes plotId, int size, HexBytes posChallenge, HexBytes proof)
         {
             var result = await PostAsync<GetProofQualityStringResult>(FullNodeRoutes.GetProofQualityString(), new Dictionary<string, string>()
             {
-                ["plot_id"] = proof.GetPlotId().Hex,
-                ["size"] = $"{proof.Size}",
-                ["challenge"] = proof.Challenge.Hex,
-                ["proof"] = proof.Proof.Hex
+                ["plot_id"] = plotId.Hex,
+                ["size"] = $"{size}",
+                ["challenge"] = posChallenge.Hex,
+                ["proof"] = proof.Hex
             });
 
             return result.Valid
