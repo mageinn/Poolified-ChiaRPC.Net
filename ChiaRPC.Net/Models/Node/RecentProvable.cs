@@ -19,6 +19,7 @@ namespace ChiaRPC.Models
         protected RecentProvable(DateTimeOffset receivedAt, ulong currentPeakHeight, bool reverted)
         {
             ReceivedAt = receivedAt;
+            CurrentPeakHeight = currentPeakHeight;
             Reverted = reverted;
         }
         protected RecentProvable()
