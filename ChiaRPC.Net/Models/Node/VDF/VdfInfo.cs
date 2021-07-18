@@ -1,9 +1,10 @@
 ﻿using ChiaRPC.Parsers;
+using ChiaRPC.Utils;
 using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Models
 {
-    public sealed class VdfInfo
+    public sealed class VdfInfo : IStreamable
     {
         [JsonPropertyName("challenge")]
         [JsonConverter(typeof(HexBytesConverter))]
@@ -18,5 +19,10 @@ namespace ChiaRPC.Models
         public VdfInfo()
         {
         }
+
+        public HexBytes Serialize()
+            => Challenge +
+                StreamableUtils.Serialize(Iterations) +
+                Output.Serialize();
     }
 }

@@ -1,9 +1,10 @@
 ﻿using ChiaRPC.Parsers;
+using ChiaRPC.Utils;
 using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Models
 {
-    public sealed class ChallengeChainSubSlot
+    public sealed class ChallengeChainSubSlot : IStreamable
     {
         [JsonPropertyName("challenge_chain_end_of_slot_vdf")]
         public VdfInfo ChallengeChainEndOfSlotVdf { get; init; }
@@ -25,5 +26,12 @@ namespace ChiaRPC.Models
         public ChallengeChainSubSlot()
         {
         }
+
+        public HexBytes Serialize()
+            => ChallengeChainEndOfSlotVdf.Serialize() +
+                StreamableUtils.WithOptional(InfusedChallengeChainSubSlotHash) +
+                StreamableUtils.WithOptional(SubepochSummaryHash) +
+                StreamableUtils.WithOptional(StreamableUtils.Serialize(NewSubSlotIters)) +
+                StreamableUtils.WithOptional(StreamableUtils.Serialize(NewDifficulty));
     }
 }

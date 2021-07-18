@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Models
 {
-    public sealed class ClassgroupElement
+    public sealed class ClassgroupElement : IStreamable
     {
         [JsonPropertyName("data")]
         [JsonConverter(typeof(HexBytesConverter))]
@@ -12,5 +12,8 @@ namespace ChiaRPC.Models
         public ClassgroupElement()
         {
         }
+
+        public HexBytes Serialize()
+            => Data;
     }
 }

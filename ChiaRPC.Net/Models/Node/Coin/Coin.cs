@@ -1,10 +1,11 @@
 ﻿using ChiaRPC.Parsers;
+using ChiaRPC.Utils;
 using System;
 using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Models
 {
-    public sealed class Coin
+    public sealed class Coin : IStreamable
     {
         [JsonPropertyName("parent_coin_info")]
         [JsonConverter(typeof(HexBytesConverter))]
@@ -23,5 +24,10 @@ namespace ChiaRPC.Models
 
         public HexBytes Name()
             => (ParentCoinInfo + PuzzleHash + BitConverter.GetBytes(Amount)).Sha256();
+
+        public HexBytes Serialize()
+            => ParentCoinInfo +
+                PuzzleHash +
+                StreamableUtils.Serialize(Amount);
     }
 }

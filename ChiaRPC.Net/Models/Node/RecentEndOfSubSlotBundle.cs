@@ -18,5 +18,11 @@ namespace ChiaRPC.Models
         {
             EndOfSubSlotBundle = endOfSubSlotBundle;
         }
+
+        public override HexBytes GetCCChallengeHash()
+            => EndOfSubSlotBundle.ChallengeChain.Serialize();
+
+        public override HexBytes GetRCChallengeHash()
+            => EndOfSubSlotBundle.RewardChain.EndOfSlotVDF.Challenge;
     }
 }

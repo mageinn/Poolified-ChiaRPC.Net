@@ -1,9 +1,10 @@
 ﻿using ChiaRPC.Parsers;
+using ChiaRPC.Utils;
 using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Models
 {
-    public sealed class ProofOfSpace
+    public sealed class ProofOfSpace : IStreamable
     {
         [JsonPropertyName("challenge")]
         [JsonConverter(typeof(HexBytesConverter))]
@@ -48,5 +49,13 @@ namespace ChiaRPC.Models
             plotId = concatenated.Sha256();
             return true;
         }
+
+        public HexBytes Serialize()
+            => Challenge +
+                StreamableUtils.WithOptional(PoolPublicKey) +
+                StreamableUtils.WithOptional(PoolContractPuzzleHash) +
+                PlotPublicKey +
+                StreamableUtils.Serialize((byte)Size) +
+                StreamableUtils.WithLength(Proof);
     }
 }

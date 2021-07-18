@@ -7,6 +7,9 @@ namespace ChiaRPC.Models
         [JsonPropertyName("challenge_chain")]
         public ChallengeChainSubSlot ChallengeChain { get; init; }
 
+        [JsonPropertyName("reward_chain")]
+        public RewardChainSubSlot RewardChain { get; init; }
+
         public EndOfSubSlotBundle()
         {
         }
