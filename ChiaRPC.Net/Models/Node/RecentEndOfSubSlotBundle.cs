@@ -13,8 +13,8 @@ namespace ChiaRPC.Models
         {
         }
 
-        public RecentEndOfSubSlotBundle(EndOfSubSlotBundle endOfSubSlotBundle, DateTimeOffset receivedAt, bool reverted)
-            : base(receivedAt, reverted)
+        public RecentEndOfSubSlotBundle(EndOfSubSlotBundle endOfSubSlotBundle, DateTimeOffset receivedAt, ulong currentPeakHeight, bool reverted)
+            : base(receivedAt, currentPeakHeight, reverted)
         {
             EndOfSubSlotBundle = endOfSubSlotBundle;
         }

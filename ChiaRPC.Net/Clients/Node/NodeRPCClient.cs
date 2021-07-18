@@ -48,7 +48,7 @@ namespace ChiaRPC.Clients
                 ["challenge_hash"] = challengeHash.Hex
             });
 
-            return new RecentEndOfSubSlotBundle(result.EndOfSubSlotBundle, result.ReceivedAt, result.Reverted);
+            return new RecentEndOfSubSlotBundle(result.EndOfSubSlotBundle, result.ReceivedAt, result.CurrentPeakHeight, result.Reverted);
         }
 
         public async Task<RecentSignagePoint> GetRecentSignagePoint(HexBytes signagePointHash)
@@ -58,7 +58,7 @@ namespace ChiaRPC.Clients
                 ["sp_hash"] = signagePointHash.Hex
             });
 
-            return new RecentSignagePoint(result.SignagePoint, result.ReceivedAt, result.Reverted);
+            return new RecentSignagePoint(result.SignagePoint, result.ReceivedAt, result.CurrentPeakHeight, result.Reverted);
         }
 
         public async Task<CoinRecord> GetCoinRecordByNameAsync(HexBytes name)
