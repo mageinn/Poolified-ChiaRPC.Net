@@ -27,6 +27,7 @@ namespace ChiaRPC.Models
         }
 
         public abstract HexBytes GetCCChallengeHash();
+        public abstract ulong GetCCNumberOfIterations();
         public abstract HexBytes GetRCChallengeHash();
     }
 }

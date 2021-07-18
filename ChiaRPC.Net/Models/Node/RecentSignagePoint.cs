@@ -20,7 +20,8 @@ namespace ChiaRPC.Models
 
         public override HexBytes GetCCChallengeHash()
             => SignagePoint.CC_Vdf.Challenge;
-
+        public override ulong GetCCNumberOfIterations()
+            => SignagePoint.CC_Vdf.Iterations;
         public override HexBytes GetRCChallengeHash()
             => SignagePoint.RC_Vdf.Challenge;
     }

@@ -20,8 +20,9 @@ namespace ChiaRPC.Models
         }
 
         public override HexBytes GetCCChallengeHash()
-            => EndOfSubSlotBundle.ChallengeChain.Serialize();
-
+            => EndOfSubSlotBundle.ChallengeChain.ChallengeChainEndOfSlotVdf.Challenge;
+        public override ulong GetCCNumberOfIterations()
+            => EndOfSubSlotBundle.ChallengeChain.ChallengeChainEndOfSlotVdf.Iterations;
         public override HexBytes GetRCChallengeHash()
             => EndOfSubSlotBundle.RewardChain.EndOfSlotVDF.Challenge;
     }
