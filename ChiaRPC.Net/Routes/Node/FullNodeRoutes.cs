@@ -45,5 +45,8 @@ namespace ChiaRPC.Routes
 
         public static Uri CheckRelativeLockHeight()
             => new Uri("check_relative_lock_height", UriKind.Relative);
+
+        public static Uri ConfirmSignagePointOrEos()
+            => new Uri("confirm_signage_point_or_eos", UriKind.Relative);
     }
 }

@@ -208,5 +208,18 @@ namespace ChiaRPC.Clients
 
             return result.Valid;
         }
+
+        async Task<bool> IExtendedNodeRPCClient.ConfirmSignagePointOrEos(HexBytes spHash, ulong hintHeight, HexBytes rewardChainChallenge, ulong challengeChainIterations)
+        {
+            var result = await PostAsync<ValidationResult>(FullNodeRoutes.ConfirmSignagePointOrEos(), new Dictionary<string, string>()
+            {
+                ["sp_hash"] = spHash.Hex,
+                ["hint_height"] = $"{hintHeight}",
+                ["rc_challenge"] = rewardChainChallenge.Hex,
+                ["cc_iters"] = $"{challengeChainIterations}"
+            });
+
+            return result.Valid;
+        }
     }
 }

@@ -76,5 +76,15 @@ namespace ChiaRPC.Clients
         /// <param name="relativeLockHeight"></param>
         /// <returns></returns>
         Task<bool> CheckRelativeLockHeight(HexBytes coinId, uint relativeLockHeight);
+
+        /// <summary>
+        /// Confirms that a signage point has or has not been reverted.
+        /// </summary>
+        /// <param name="spHash"></param>
+        /// <param name="hintHeight"></param>
+        /// <param name="rewardChainChallenge"></param>
+        /// <param name="challengeChainIterations"></param>
+        /// <returns></returns>
+        Task<bool> ConfirmSignagePointOrEos(HexBytes spHash, ulong hintHeight, HexBytes rewardChainChallenge, ulong challengeChainIterations);
     }
 }
