@@ -12,7 +12,7 @@ namespace ChiaRPC.Models
             : base()
         {
         }
-        public RecentSignagePoint(SignagePoint signagePoint, DateTimeOffset receivedAt, ulong currentPeakHeight, bool reverted)
+        public RecentSignagePoint(SignagePoint signagePoint, DateTimeOffset receivedAt, uint currentPeakHeight, bool reverted)
             : base(receivedAt, currentPeakHeight, reverted)
         {
             SignagePoint = signagePoint;

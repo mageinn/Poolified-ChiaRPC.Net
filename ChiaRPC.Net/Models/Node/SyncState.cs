@@ -8,10 +8,10 @@ namespace ChiaRPC.Models
         public bool Mode { get; init; }
 
         [JsonPropertyName("sync_progress_height")]
-        public ulong ProgressHeight { get; init; }
+        public uint ProgressHeight { get; init; }
 
         [JsonPropertyName("sync_tip_height")]
-        public ulong TipHeight { get; init; }
+        public uint TipHeight { get; init; }
 
         [JsonPropertyName("synced")]
         public bool Synced { get; init; }

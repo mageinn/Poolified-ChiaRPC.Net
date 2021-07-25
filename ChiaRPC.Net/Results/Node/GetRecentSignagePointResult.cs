@@ -15,7 +15,7 @@ namespace ChiaRPC.Results
         public DateTimeOffset ReceivedAt { get; init; }
 
         [JsonPropertyName("peak_height")]
-        public ulong CurrentPeakHeight { get; init; }
+        public uint CurrentPeakHeight { get; init; }
 
         [JsonPropertyName("reverted")]
         public bool Reverted { get; init; }

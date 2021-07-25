@@ -11,12 +11,12 @@ namespace ChiaRPC.Models
         public DateTimeOffset ReceivedAt { get; init; }
 
         [JsonPropertyName("peak_height")]
-        public ulong CurrentPeakHeight { get; init; }
+        public uint CurrentPeakHeight { get; init; }
 
         [JsonPropertyName("reverted")]
         public bool Reverted { get; init; }
 
-        protected RecentProvable(DateTimeOffset receivedAt, ulong currentPeakHeight, bool reverted)
+        protected RecentProvable(DateTimeOffset receivedAt, uint currentPeakHeight, bool reverted)
         {
             ReceivedAt = receivedAt;
             CurrentPeakHeight = currentPeakHeight;
