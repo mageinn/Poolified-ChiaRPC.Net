@@ -238,7 +238,7 @@ namespace ChiaRPC.Clients
             return result.Valid;
         }
 
-        async Task<TxResult> IExtendedNodeRPCClient.AbsorbSingletonReward(HexBytes launcherId, CoinSolution singletonTip, PoolState poolStateTip, uint rewardConfirmedHeight, HexBytes rewardCoinParentInfo)
+        async Task<TxResult> IExtendedNodeRPCClient.AbsorbSingletonRewardAsync(HexBytes launcherId, CoinSolution singletonTip, PoolState poolStateTip, uint rewardConfirmedHeight, HexBytes rewardCoinParentInfo)
         {
             var result = await PostAsyncRaw<AbsorbSingletonRewardResult>(FullNodeRoutes.AbsorbSingletonReward(), new Dictionary<string, object>()
             {
