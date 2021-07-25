@@ -39,7 +39,7 @@ namespace ChiaRPC.Clients
         /// </summary>
         /// <param name="signagePointHash"></param>
         /// <returns></returns>
-        Task<RecentSignagePoint> GetRecentSignagePoint(HexBytes signagePointHash);
+        Task<RecentSignagePoint> GetRecentSignagePointAsync(HexBytes signagePointHash);
 
         /// <summary>
         /// Retrieves a coin record by its name/id.
@@ -54,14 +54,14 @@ namespace ChiaRPC.Clients
         /// <param name="coinId"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        Task<CoinSolution> GetPuzzleAndSolution(HexBytes coinId, ulong height);
+        Task<CoinSolution> GetPuzzleAndSolutionAsync(HexBytes coinId, ulong height);
 
         /// <summary>
         /// Gets the puzzle and solution of a spent coin.
         /// </summary>
         /// <param name="coinRecord"></param>
         /// <returns></returns>
-        Task<CoinSolution> GetPuzzleAndSolution(CoinRecord coinRecord);
+        Task<CoinSolution> GetPuzzleAndSolutionAsync(CoinRecord coinRecord);
 
         /// <summary>
         /// Retrieves all CoinRecords from a set of puzzleHashes.
@@ -72,6 +72,6 @@ namespace ChiaRPC.Clients
         /// <param name="endHeight"></param>
         /// <param name="includeSpentCoins"></param>
         /// <returns></returns>
-        Task<CoinRecord[]> GetCoinRecordsByPuzzleHashes(IEnumerable<HexBytes> puzzleHashes, ulong startHeight, ulong endHeight, bool includeSpentCoins);
+        Task<CoinRecord[]> GetCoinRecordsByPuzzleHashesAsync(IEnumerable<HexBytes> puzzleHashes, ulong startHeight, ulong endHeight, bool includeSpentCoins);
     }
 }

@@ -51,7 +51,7 @@ namespace ChiaRPC.Clients
             return new RecentEndOfSubSlotBundle(result.EndOfSubSlotBundle, result.ReceivedAt, result.CurrentPeakHeight, result.Reverted);
         }
 
-        public async Task<RecentSignagePoint> GetRecentSignagePoint(HexBytes signagePointHash)
+        public async Task<RecentSignagePoint> GetRecentSignagePointAsync(HexBytes signagePointHash)
         {
             var result = await PostAsync<GetRecentSignagePointResult>(FullNodeRoutes.GetRecentSignagePointOrEos(), new Dictionary<string, string>()
             {
@@ -70,7 +70,7 @@ namespace ChiaRPC.Clients
 
             return result.CoinRecord;
         }
-        public async Task<CoinSolution> GetPuzzleAndSolution(HexBytes coinId, ulong height)
+        public async Task<CoinSolution> GetPuzzleAndSolutionAsync(HexBytes coinId, ulong height)
         {
             var result = await PostAsync<GetPuzzleAndSolutionResult>(FullNodeRoutes.GetPuzzleAndSolution(), new Dictionary<string, string>()
             {
@@ -81,10 +81,10 @@ namespace ChiaRPC.Clients
             return result.CoinSolution;
         }
 
-        public Task<CoinSolution> GetPuzzleAndSolution(CoinRecord coinRecord)
-            => GetPuzzleAndSolution(coinRecord.Name(), coinRecord.SpentBlockIndex);
+        public Task<CoinSolution> GetPuzzleAndSolutionAsync(CoinRecord coinRecord)
+            => GetPuzzleAndSolutionAsync(coinRecord.Name(), coinRecord.SpentBlockIndex);
 
-        public async Task<CoinRecord[]> GetCoinRecordsByPuzzleHashes(IEnumerable<HexBytes> puzzleHashes, ulong startHeight, ulong endHeight, bool includeSpentCoins)
+        public async Task<CoinRecord[]> GetCoinRecordsByPuzzleHashesAsync(IEnumerable<HexBytes> puzzleHashes, ulong startHeight, ulong endHeight, bool includeSpentCoins)
         {
             var result = await PostAsyncRaw<CoinRecordsResult>(FullNodeRoutes.GetCoinRecordsByPuzzleHashes(), new Dictionary<string, object>()
             {
@@ -211,7 +211,7 @@ namespace ChiaRPC.Clients
                 : null;
         }
 
-        async Task<bool> IExtendedNodeRPCClient.CheckRelativeLockHeight(HexBytes coinId, uint relativeLockHeight)
+        async Task<bool> IExtendedNodeRPCClient.CheckRelativeLockHeightAsync(HexBytes coinId, uint relativeLockHeight)
         {
             var result = await PostAsync<ValidationResult>(FullNodeRoutes.CheckRelativeLockHeight(), new Dictionary<string, string>()
             {
@@ -222,7 +222,7 @@ namespace ChiaRPC.Clients
             return result.Valid;
         }
 
-        async Task<bool> IExtendedNodeRPCClient.ConfirmSignagePointOrEos(HexBytes spHash, ulong hintHeight, HexBytes rewardChainChallenge, ulong challengeChainIterations)
+        async Task<bool> IExtendedNodeRPCClient.ConfirmSignagePointOrEosAsync(HexBytes spHash, ulong hintHeight, HexBytes rewardChainChallenge, ulong challengeChainIterations)
         {
             var result = await PostAsync<ValidationResult>(FullNodeRoutes.ConfirmSignagePointOrEos(), new Dictionary<string, string>()
             {
