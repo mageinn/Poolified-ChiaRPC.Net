@@ -54,7 +54,7 @@ namespace ChiaRPC.Clients
         /// <param name="coinId"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        Task<CoinSolution> GetPuzzleAndSolutionAsync(HexBytes coinId, ulong height);
+        Task<CoinSolution> GetPuzzleAndSolutionAsync(HexBytes coinId, uint height);
 
         /// <summary>
         /// Gets the puzzle and solution of a spent coin.
@@ -72,6 +72,6 @@ namespace ChiaRPC.Clients
         /// <param name="endHeight"></param>
         /// <param name="includeSpentCoins"></param>
         /// <returns></returns>
-        Task<CoinRecord[]> GetCoinRecordsByPuzzleHashesAsync(IEnumerable<HexBytes> puzzleHashes, ulong startHeight, ulong endHeight, bool includeSpentCoins);
+        Task<CoinRecord[]> GetCoinRecordsByPuzzleHashesAsync(IEnumerable<HexBytes> puzzleHashes, uint startHeight, uint endHeight, bool includeSpentCoins);
     }
 }

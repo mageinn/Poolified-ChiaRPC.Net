@@ -70,7 +70,7 @@ namespace ChiaRPC.Clients
 
             return result.CoinRecord;
         }
-        public async Task<CoinSolution> GetPuzzleAndSolutionAsync(HexBytes coinId, ulong height)
+        public async Task<CoinSolution> GetPuzzleAndSolutionAsync(HexBytes coinId, uint height)
         {
             var result = await PostAsync<GetPuzzleAndSolutionResult>(FullNodeRoutes.GetPuzzleAndSolution(), new Dictionary<string, string>()
             {
@@ -84,7 +84,7 @@ namespace ChiaRPC.Clients
         public Task<CoinSolution> GetPuzzleAndSolutionAsync(CoinRecord coinRecord)
             => GetPuzzleAndSolutionAsync(coinRecord.Name(), coinRecord.SpentBlockIndex);
 
-        public async Task<CoinRecord[]> GetCoinRecordsByPuzzleHashesAsync(IEnumerable<HexBytes> puzzleHashes, ulong startHeight, ulong endHeight, bool includeSpentCoins)
+        public async Task<CoinRecord[]> GetCoinRecordsByPuzzleHashesAsync(IEnumerable<HexBytes> puzzleHashes, uint startHeight, uint endHeight, bool includeSpentCoins)
         {
             var result = await PostAsyncRaw<CoinRecordsResult>(FullNodeRoutes.GetCoinRecordsByPuzzleHashes(), new Dictionary<string, object>()
             {
@@ -222,7 +222,7 @@ namespace ChiaRPC.Clients
             return result.Valid;
         }
 
-        async Task<bool> IExtendedNodeRPCClient.ConfirmSignagePointOrEosAsync(HexBytes spHash, ulong hintHeight, HexBytes rewardChainChallenge, ulong challengeChainIterations)
+        async Task<bool> IExtendedNodeRPCClient.ConfirmSignagePointOrEosAsync(HexBytes spHash, uint hintHeight, HexBytes rewardChainChallenge, ulong challengeChainIterations)
         {
             var result = await PostAsync<ValidationResult>(FullNodeRoutes.ConfirmSignagePointOrEos(), new Dictionary<string, string>()
             {

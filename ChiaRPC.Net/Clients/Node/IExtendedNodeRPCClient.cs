@@ -85,6 +85,6 @@ namespace ChiaRPC.Clients
         /// <param name="rewardChainChallenge"></param>
         /// <param name="challengeChainIterations"></param>
         /// <returns></returns>
-        Task<bool> ConfirmSignagePointOrEosAsync(HexBytes spHash, ulong hintHeight, HexBytes rewardChainChallenge, ulong challengeChainIterations);
+        Task<bool> ConfirmSignagePointOrEosAsync(HexBytes spHash, uint hintHeight, HexBytes rewardChainChallenge, ulong challengeChainIterations);
     }
 }
