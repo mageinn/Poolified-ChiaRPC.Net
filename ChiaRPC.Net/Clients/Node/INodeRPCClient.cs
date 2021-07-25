@@ -72,6 +72,6 @@ namespace ChiaRPC.Clients
         /// <param name="endHeight"></param>
         /// <param name="includeSpentCoins"></param>
         /// <returns></returns>
-        Task<CoinRecord[]> GetCoinRecordsByPuzzleHashesAsync(IEnumerable<HexBytes> puzzleHashes, uint startHeight, uint endHeight, bool includeSpentCoins);
+        Task<CoinRecord[]> GetCoinRecordsByPuzzleHashesAsync(IEnumerable<HexBytes> puzzleHashes, uint startHeight, uint endHeight, bool includeSpentCoins, bool excludeNonCoinbase);
     }
 }

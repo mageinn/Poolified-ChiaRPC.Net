@@ -84,14 +84,17 @@ namespace ChiaRPC.Clients
         public Task<CoinSolution> GetPuzzleAndSolutionAsync(CoinRecord coinRecord)
             => GetPuzzleAndSolutionAsync(coinRecord.Name(), coinRecord.SpentBlockIndex);
 
-        public async Task<CoinRecord[]> GetCoinRecordsByPuzzleHashesAsync(IEnumerable<HexBytes> puzzleHashes, uint startHeight, uint endHeight, bool includeSpentCoins)
+        public async Task<CoinRecord[]> GetCoinRecordsByPuzzleHashesAsync(IEnumerable<HexBytes> puzzleHashes, 
+            uint startHeight = 0, uint endHeight = int.MaxValue, 
+            bool includeSpentCoins = false, bool excludeNonCoinbase = false)
         {
             var result = await PostAsyncRaw<CoinRecordsResult>(FullNodeRoutes.GetCoinRecordsByPuzzleHashes(), new Dictionary<string, object>()
             {
                 ["puzzle_hashes"] = puzzleHashes,
                 ["start_height"] = $"{startHeight}",
                 ["end_height"] = $"{endHeight}",
-                ["include_spent_coins"] = $"{includeSpentCoins}"
+                ["include_spent_coins"] = $"{includeSpentCoins}",
+                ["exclude_non_coinbase"] = $"{excludeNonCoinbase}"
             });
 
             return result.CoinRecords;
