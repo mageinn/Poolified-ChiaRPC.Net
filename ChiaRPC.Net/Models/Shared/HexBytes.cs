@@ -48,12 +48,12 @@ namespace ChiaRPC.Models
             return new HexBytes(concatHex, concatBytes);
         }
 
-        public static bool operator ==(HexBytes a, HexBytes b) 
+        public static bool operator ==(HexBytes a, HexBytes b)
             => a.Hex.ToUpperInvariant() == b.Hex.ToUpperInvariant();
         public static bool operator !=(HexBytes a, HexBytes b)
             => a.Hex.ToUpperInvariant() != b.Hex.ToUpperInvariant();
 
-        public static HexBytes FromHex(string hex) 
+        public static HexBytes FromHex(string hex)
             => string.IsNullOrWhiteSpace(hex)
                 ? Empty
                 : hex.StartsWith("0x")
@@ -82,7 +82,7 @@ namespace ChiaRPC.Models
         }
 
 
-        public static HexBytes FromBytes(byte[] bytes) 
+        public static HexBytes FromBytes(byte[] bytes)
             => bytes == null
                 ? Empty
                 : new HexBytes(

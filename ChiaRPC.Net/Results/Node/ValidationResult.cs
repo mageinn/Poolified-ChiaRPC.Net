@@ -4,7 +4,7 @@ namespace ChiaRPC.Results
 {
     internal sealed class ValidationResult : ChiaResult
     {
-        [JsonPropertyName("valid")] 
+        [JsonPropertyName("valid")]
         public bool Valid { get; init; }
 
         public ValidationResult()

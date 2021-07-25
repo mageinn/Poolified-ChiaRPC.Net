@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Results
 {
-    internal class PoolStateResult : ChiaResult
+    internal sealed class PoolStateResult : ChiaResult
     {
         [JsonPropertyName("has_value")]
         public bool HasValue { get; init; }

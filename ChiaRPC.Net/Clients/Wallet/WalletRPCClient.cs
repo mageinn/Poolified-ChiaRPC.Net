@@ -9,7 +9,7 @@ namespace ChiaRPC.Clients
 {
     public sealed class WalletRPCClient : ChiaRPCClient
     {
-        public WalletRPCClient(ChiaRPCOptions options, string apiUrl) 
+        public WalletRPCClient(ChiaRPCOptions options, string apiUrl)
             : base(options, "wallet", apiUrl)
         {
         }

@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Results
 {
-    public sealed class GetRecentEosResult : ChiaResult
+    internal sealed class GetRecentEosResult : ChiaResult
     {
         [JsonPropertyName("eos")]
         public EndOfSubSlotBundle EndOfSubSlotBundle { get; init; }

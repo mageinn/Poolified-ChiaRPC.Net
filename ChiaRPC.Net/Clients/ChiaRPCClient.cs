@@ -7,8 +7,6 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Security.Cryptography.X509Certificates;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ChiaRPC.Clients
@@ -50,7 +48,7 @@ namespace ChiaRPC.Clients
 
             var certificate = X509Certificate2.CreateFromPemFile(certificatePath, keyPath);
 
-            return OperatingSystem.IsWindows() 
+            return OperatingSystem.IsWindows()
                 ? new X509Certificate2(certificate.Export(X509ContentType.Pkcs12)) //This is required due to a bug. Might be fixed in dotnet 6.0
                 : certificate;
         }

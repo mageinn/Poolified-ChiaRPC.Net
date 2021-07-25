@@ -9,7 +9,7 @@ namespace ChiaRPC.Models
 
         [JsonPropertyName("buried_singleton_tip_state")]
         public PoolState BuriedSingletonPoolState { get; init; }
-        
+
         [JsonPropertyName("singleton_tip_state")]
         public PoolState SingletonPoolState { get; init; }
 

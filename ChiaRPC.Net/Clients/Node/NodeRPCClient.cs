@@ -8,7 +8,7 @@ namespace ChiaRPC.Clients
 {
     public sealed class NodeRPCClient : ChiaRPCClient, IExtendedNodeRPCClient
     {
-        public NodeRPCClient(ChiaRPCOptions options, string apiUrl) 
+        public NodeRPCClient(ChiaRPCOptions options, string apiUrl)
             : base(options, "full_node", apiUrl)
         {
         }
@@ -83,6 +83,19 @@ namespace ChiaRPC.Clients
 
         public Task<CoinSolution> GetPuzzleAndSolution(CoinRecord coinRecord)
             => GetPuzzleAndSolution(coinRecord.Name(), coinRecord.SpentBlockIndex);
+
+        public async Task<CoinRecord[]> GetCoinRecordsByPuzzleHashes(IEnumerable<HexBytes> puzzleHashes, ulong startHeight, ulong endHeight, bool includeSpentCoins)
+        {
+            var result = await PostAsyncRaw<CoinRecordsResult>(FullNodeRoutes.GetCoinRecordsByPuzzleHashes(), new Dictionary<string, object>()
+            {
+                ["puzzle_hashes"] = puzzleHashes,
+                ["start_height"] = $"{startHeight}",
+                ["end_height"] = $"{endHeight}",
+                ["include_spent_coins"] = $"{includeSpentCoins}"
+            });
+
+            return result.CoinRecords;
+        }
 
         async Task<HexBytes> IExtendedNodeRPCClient.GetPayToSingletonPuzzleHashFromLauncherIdAsync(HexBytes launcherId, ulong delayTime, HexBytes delayPuzzleHash)
         {
@@ -193,8 +206,8 @@ namespace ChiaRPC.Clients
 
             var result = await PostAsyncRaw<SingletonStateResult>(FullNodeRoutes.GetSingletonState(), parameters);
 
-            return result.HasValue 
-                ? result.SingletonState 
+            return result.HasValue
+                ? result.SingletonState
                 : null;
         }
 

@@ -1,4 +1,5 @@
 ﻿using ChiaRPC.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ChiaRPC.Clients
@@ -61,5 +62,16 @@ namespace ChiaRPC.Clients
         /// <param name="coinRecord"></param>
         /// <returns></returns>
         Task<CoinSolution> GetPuzzleAndSolution(CoinRecord coinRecord);
+
+        /// <summary>
+        /// Retrieves all CoinRecords from a set of puzzleHashes.
+        /// Allows for checking some additional properties.
+        /// </summary>
+        /// <param name="puzzleHashes"></param>
+        /// <param name="startHeight"></param>
+        /// <param name="endHeight"></param>
+        /// <param name="includeSpentCoins"></param>
+        /// <returns></returns>
+        Task<CoinRecord[]> GetCoinRecordsByPuzzleHashes(IEnumerable<HexBytes> puzzleHashes, ulong startHeight, ulong endHeight, bool includeSpentCoins);
     }
 }

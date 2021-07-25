@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Results
 {
-    public sealed class GetRecentSignagePointResult : ChiaResult
+    internal sealed class GetRecentSignagePointResult : ChiaResult
     {
         [JsonPropertyName("signage_point")]
         public SignagePoint SignagePoint { get; init; }

@@ -34,6 +34,9 @@ namespace ChiaRPC.Routes
         public static Uri GetPuzzleAndSolution()
             => new Uri("get_puzzle_and_solution", UriKind.Relative);
 
+        public static Uri GetCoinRecordsByPuzzleHashes()
+            => new Uri("get_coin_records_by_puzzle_hashes", UriKind.Relative);
+
         public static Uri GetDelayedPuzzleInfoFromLauncherId()
             => new Uri("get_delayed_puzzle_info_from_launcher_id", UriKind.Relative);
 
