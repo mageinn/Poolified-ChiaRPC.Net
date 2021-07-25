@@ -51,5 +51,8 @@ namespace ChiaRPC.Routes
 
         public static Uri ConfirmSignagePointOrEos()
             => new Uri("confirm_signage_point_or_eos", UriKind.Relative);
+
+        public static Uri AbsorbSingletonReward()
+            => new Uri("absorb_singleton_reward", UriKind.Relative);
     }
 }

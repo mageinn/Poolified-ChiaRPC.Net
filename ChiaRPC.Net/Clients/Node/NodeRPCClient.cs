@@ -237,5 +237,19 @@ namespace ChiaRPC.Clients
 
             return result.Valid;
         }
+
+        async Task<TxResult> IExtendedNodeRPCClient.AbsorbSingletonReward(HexBytes launcherId, CoinSolution singletonTip, PoolState poolStateTip, uint rewardConfirmedHeight, HexBytes rewardCoinParentInfo)
+        {
+            var result = await PostAsyncRaw<AbsorbSingletonRewardResult>(FullNodeRoutes.AbsorbSingletonReward(), new Dictionary<string, object>()
+            {
+                ["launcher_id"] = launcherId.Hex,
+                ["singleton_tip"] = singletonTip,
+                ["poolstate_tip"] = poolStateTip,
+                ["reward_confirmed_height"] = rewardConfirmedHeight,
+                ["reward_coin_parent_info"] = rewardCoinParentInfo.Hex
+            });
+
+            return new TxResult(result.Status, result.Error);
+        }
     }
 }

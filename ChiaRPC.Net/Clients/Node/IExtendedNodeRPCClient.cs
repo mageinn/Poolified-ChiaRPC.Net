@@ -86,5 +86,16 @@ namespace ChiaRPC.Clients
         /// <param name="challengeChainIterations"></param>
         /// <returns></returns>
         Task<bool> ConfirmSignagePointOrEosAsync(HexBytes spHash, uint hintHeight, HexBytes rewardChainChallenge, ulong challengeChainIterations);
+
+        /// <summary>
+        /// Absorbs a singleton reward.
+        /// </summary>
+        /// <param name="launcherId"></param>
+        /// <param name="singletonTip"></param>
+        /// <param name="poolStateTip"></param>
+        /// <param name="rewardConfirmedHeight"></param>
+        /// <param name="rewardCoinParentInfo"></param>
+        /// <returns></returns>
+        Task<TxResult> AbsorbSingletonReward(HexBytes launcherId, CoinSolution singletonTip, PoolState poolStateTip, uint rewardConfirmedHeight, HexBytes rewardCoinParentInfo);
     }
 }
