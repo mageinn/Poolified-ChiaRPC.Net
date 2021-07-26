@@ -1,6 +1,7 @@
 ﻿using ChiaRPC.Models;
 using ChiaRPC.Results;
 using ChiaRPC.Routes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -89,6 +90,11 @@ namespace ChiaRPC.Clients
             uint startHeight = 0, uint endHeight = int.MaxValue, 
             bool includeSpentCoins = false, bool excludeNonCoinbase = false)
         {
+            if (!puzzleHashes.Any())
+            {
+                return Array.Empty<CoinRecord>();
+            }
+
             var result = await PostAsyncRaw<CoinRecordsResult>(FullNodeRoutes.GetCoinRecordsByPuzzleHashes(), new Dictionary<string, object>()
             {
                 ["puzzle_hashes"] = puzzleHashes.Select(x => x.Hex),
