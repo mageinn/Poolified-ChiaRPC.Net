@@ -2,6 +2,7 @@
 using ChiaRPC.Results;
 using ChiaRPC.Routes;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ChiaRPC.Clients
@@ -90,7 +91,7 @@ namespace ChiaRPC.Clients
         {
             var result = await PostAsyncRaw<CoinRecordsResult>(FullNodeRoutes.GetCoinRecordsByPuzzleHashes(), new Dictionary<string, object>()
             {
-                ["puzzle_hashes"] = puzzleHashes,
+                ["puzzle_hashes"] = puzzleHashes.Select(x => x.Hex),
                 ["start_height"] = $"{startHeight}",
                 ["end_height"] = $"{endHeight}",
                 ["include_spent_coins"] = $"{includeSpentCoins}",
