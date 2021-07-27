@@ -48,7 +48,8 @@ namespace ChiaRPC.Clients
             var result = await PostAsync<GetRecentEosResult>(FullNodeRoutes.GetRecentSignagePointOrEos(), new Dictionary<string, string>()
             {
                 ["challenge_hash"] = challengeHash.Hex
-            });
+            },
+            throwOnError: false);
 
             return new RecentEndOfSubSlotBundle(result.EndOfSubSlotBundle, result.ReceivedAt, result.CurrentPeakHeight, result.Reverted);
         }
@@ -58,7 +59,8 @@ namespace ChiaRPC.Clients
             var result = await PostAsync<GetRecentSignagePointResult>(FullNodeRoutes.GetRecentSignagePointOrEos(), new Dictionary<string, string>()
             {
                 ["sp_hash"] = signagePointHash.Hex
-            });
+            },
+            throwOnError: false);
 
             return new RecentSignagePoint(result.SignagePoint, result.ReceivedAt, result.CurrentPeakHeight, result.Reverted);
         }
