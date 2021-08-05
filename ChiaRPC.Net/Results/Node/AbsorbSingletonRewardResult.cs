@@ -1,4 +1,5 @@
 ﻿using ChiaRPC.Models;
+using ChiaRPC.Parsers;
 using System.Text.Json.Serialization;
 
 namespace ChiaRPC.Results
@@ -12,6 +13,7 @@ namespace ChiaRPC.Results
         public int Error { get; init; }
 
         [JsonPropertyName("created_coin_name")]
+        [JsonConverter(typeof(HexBytesConverter))]
         public HexBytes? CreatedCoinName { get; init; }
 
         [JsonPropertyName("farmed_height")]
