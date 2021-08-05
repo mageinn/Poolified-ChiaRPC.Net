@@ -96,6 +96,6 @@ namespace ChiaRPC.Clients
         /// <param name="rewardConfirmedHeight"></param>
         /// <param name="rewardCoinParentInfo"></param>
         /// <returns></returns>
-        Task<TxResult> AbsorbSingletonRewardAsync(HexBytes launcherId, CoinSolution singletonTip, PoolState poolStateTip, uint rewardConfirmedHeight, HexBytes rewardCoinParentInfo);
+        Task<AbsorbptionResult> AbsorbSingletonRewardAsync(HexBytes launcherId, CoinSolution singletonTip, PoolState poolStateTip, uint rewardConfirmedHeight, HexBytes rewardCoinParentInfo);
     }
 }
