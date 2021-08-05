@@ -51,7 +51,9 @@ namespace ChiaRPC.Clients
             },
             throwOnError: false);
 
-            return new RecentEndOfSubSlotBundle(result.EndOfSubSlotBundle, result.ReceivedAt, result.CurrentPeakHeight, result.Reverted);
+            return result != null
+                ? new RecentEndOfSubSlotBundle(result.EndOfSubSlotBundle, result.ReceivedAt, result.CurrentPeakHeight, result.Reverted)
+                : null;
         }
 
         public async Task<RecentSignagePoint> GetRecentSignagePointAsync(HexBytes signagePointHash)
@@ -62,7 +64,9 @@ namespace ChiaRPC.Clients
             },
             throwOnError: false);
 
-            return new RecentSignagePoint(result.SignagePoint, result.ReceivedAt, result.CurrentPeakHeight, result.Reverted);
+            return result != null
+                ? new RecentSignagePoint(result.SignagePoint, result.ReceivedAt, result.CurrentPeakHeight, result.Reverted)
+                : null;
         }
 
         public async Task<CoinRecord> GetCoinRecordByNameAsync(HexBytes name)
@@ -88,8 +92,8 @@ namespace ChiaRPC.Clients
         public Task<CoinSolution> GetPuzzleAndSolutionAsync(CoinRecord coinRecord)
             => GetPuzzleAndSolutionAsync(coinRecord.Name(), coinRecord.SpentBlockIndex);
 
-        public async Task<CoinRecord[]> GetCoinRecordsByPuzzleHashesAsync(IEnumerable<HexBytes> puzzleHashes, 
-            uint startHeight = 0, uint endHeight = int.MaxValue, 
+        public async Task<CoinRecord[]> GetCoinRecordsByPuzzleHashesAsync(IEnumerable<HexBytes> puzzleHashes,
+            uint startHeight = 0, uint endHeight = int.MaxValue,
             bool includeSpentCoins = false, bool excludeNonCoinbase = false)
         {
             if (!puzzleHashes.Any())
