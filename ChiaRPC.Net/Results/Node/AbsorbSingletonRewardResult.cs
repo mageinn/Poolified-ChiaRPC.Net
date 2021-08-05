@@ -12,7 +12,10 @@ namespace ChiaRPC.Results
         public int Error { get; init; }
 
         [JsonPropertyName("created_coin_name")]
-        public HexBytes CreatedCoinName { get; init; }
+        public HexBytes? CreatedCoinName { get; init; }
+
+        [JsonPropertyName("farmed_height")]
+        public ulong? FarmedHeight { get; init; }
 
         public AbsorbSingletonRewardResult()
         {

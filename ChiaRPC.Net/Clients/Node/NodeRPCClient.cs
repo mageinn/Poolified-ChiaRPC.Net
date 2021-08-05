@@ -262,7 +262,7 @@ namespace ChiaRPC.Clients
                 ["reward_coin_parent_info"] = rewardCoinParentInfo.Hex
             });
 
-            return new AbsorbptionResult(result.Status, result.Error, result.CreatedCoinName);
+            return new AbsorbptionResult(result.Status, result.Error, result.CreatedCoinName ?? HexBytes.Empty, result.FarmedHeight ?? 0);
         }
     }
 }
