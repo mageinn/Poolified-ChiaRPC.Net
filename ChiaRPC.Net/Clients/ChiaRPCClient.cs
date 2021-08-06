@@ -90,9 +90,7 @@ namespace ChiaRPC.Clients
                 throw new HttpRequestException("Chia responded with unsuccessful");
             }
             //
-            return !result.Success
-                ? default
-                : result;
+            return result;
         }
 
         protected Task<T> PostAsync<T>(Uri requestUri, Dictionary<string, string> parameters = null, bool throwOnError = true) where T : ChiaResult

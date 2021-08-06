@@ -51,7 +51,7 @@ namespace ChiaRPC.Clients
             },
             throwOnError: false);
 
-            return result != null
+            return result.Success
                 ? new RecentEndOfSubSlotBundle(result.EndOfSubSlotBundle, result.ReceivedAt, result.CurrentPeakHeight, result.Reverted)
                 : null;
         }
@@ -64,7 +64,7 @@ namespace ChiaRPC.Clients
             },
             throwOnError: false);
 
-            return result != null
+            return result.Success
                 ? new RecentSignagePoint(result.SignagePoint, result.ReceivedAt, result.CurrentPeakHeight, result.Reverted)
                 : null;
         }
