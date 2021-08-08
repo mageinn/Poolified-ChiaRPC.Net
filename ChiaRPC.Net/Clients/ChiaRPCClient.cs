@@ -44,8 +44,6 @@ namespace ChiaRPC.Clients
                 throw new FileNotFoundException($"Could not find certificate key file \"{keyPath}\"");
             }
 
-
-
             var certificate = X509Certificate2.CreateFromPemFile(certificatePath, keyPath);
 
             return OperatingSystem.IsWindows()
@@ -74,16 +72,52 @@ namespace ChiaRPC.Clients
             return result.Connections;
         }
 
-        protected async Task<T> PostAsyncRaw<T>(Uri requestUri, object parameters = null, bool throwOnError = true) where T : ChiaResult
+        /// <summary>
+        /// Opens a connection to another peer.
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="port"></param>
+        /// <returns></returns>
+        public async Task OpenConnection(string host, ushort port)
         {
-            using var request = new HttpRequestMessage(HttpMethod.Post, new Uri(ApiUrl, requestUri))
+            await PostAsync(SharedRoutes.OpenConnection(), new Dictionary<string, string>()
             {
-                Content = JsonContent.Create(parameters ?? new Dictionary<string, string>())
-            };
+                ["host"] = host,
+                ["port"] = $"{port}",
+            });
+        }
 
-            var response = await Client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadFromJsonAsync<T>();
+        /// <summary>
+        /// Opens a connection to another peer.
+        /// </summary>
+        /// <param name="address"></param>
+        /// <returns></returns>
+        public Task OpenConnection(Uri address)
+            => OpenConnection(address.Host, (ushort)address.Port);
+
+        /// <summary>
+        /// Closes a connection with a peer.
+        /// </summary>
+        /// <param name="nodeId"></param>
+        /// <returns></returns>
+        public async Task CloseConnection(HexBytes nodeId)
+        {
+            await PostAsync(SharedRoutes.CloseConnection(), new Dictionary<string, string>()
+            {
+                ["node_id"] = $"{nodeId}"
+            });
+        }
+
+        protected async Task<T> PostAsyncRaw<T>(Uri requestUri, object parameters = null, bool throwOnError = true) where T : ChiaResult
+            {
+                using var request = new HttpRequestMessage(HttpMethod.Post, new Uri(ApiUrl, requestUri))
+                {
+                    Content = JsonContent.Create(parameters ?? new Dictionary<string, string>())
+                };
+
+                var response = await Client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+                var result = await response.Content.ReadFromJsonAsync<T>();
 
             if (throwOnError && !result.Success)
             {
@@ -93,10 +127,10 @@ namespace ChiaRPC.Clients
             return result;
         }
 
-        protected Task<T> PostAsync<T>(Uri requestUri, Dictionary<string, string> parameters = null, bool throwOnError = true) where T : ChiaResult
-            => PostAsyncRaw<T>(requestUri, parameters, throwOnError);
+            protected Task<T> PostAsync<T>(Uri requestUri, Dictionary<string, string> parameters = null, bool throwOnError = true) where T : ChiaResult
+                => PostAsyncRaw<T>(requestUri, parameters, throwOnError);
 
-        protected Task PostAsync(Uri requestUri, Dictionary<string, string> parameters = null)
-            => PostAsync<ChiaResult>(requestUri, parameters);
+            protected Task PostAsync(Uri requestUri, Dictionary<string, string> parameters = null)
+                => PostAsync<ChiaResult>(requestUri, parameters);
+        }
     }
-}
