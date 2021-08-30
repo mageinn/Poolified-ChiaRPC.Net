@@ -33,12 +33,12 @@ namespace ChiaRPC.Clients
         /// Retrieves the address of the wallet at the given id for the current key.
         /// </summary>
         /// <returns></returns>
-        public async Task<string> GetWalletAddressAsync(uint walletId, bool generateAddress)
+        public async Task<string> GetWalletAddressAsync(uint walletId, bool generateNewAddress)
         {
-            var result = await PostAsync<GetWalletAddressResult>(WalletRoutes.GetWalletAddress(), new Dictionary<string, string>()
+            var result = await PostAsyncRaw<GetWalletAddressResult>(WalletRoutes.GetWalletAddress(), new Dictionary<string, object>()
             {
                 ["wallet_id"] = $"{walletId}",
-                ["new_address"] = $"{generateAddress}"
+                ["new_address"] = generateNewAddress
             });
             return result.Address;
         }
