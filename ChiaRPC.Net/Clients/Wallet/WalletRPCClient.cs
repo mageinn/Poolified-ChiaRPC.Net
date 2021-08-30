@@ -174,16 +174,16 @@ namespace ChiaRPC.Clients
         /// Gets transaction records for a walletId.
         /// </summary>
         /// <param name="walletId"></param>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
+        /// <param name="startIndex"></param>
+        /// <param name="endIndex"></param>
         /// <returns></returns>
-        public async Task<TransactionRecord[]> GetTransactionsAsync(uint walletId, uint start = 0, uint end = 50)
+        public async Task<TransactionRecord[]> GetTransactionsAsync(uint walletId, uint startIndex = 0, uint endIndex = 50)
         {
-            var result = await PostAsync<GetTransactionsResult>(WalletRoutes.GetTransactions(), new Dictionary<string, string>()
+            var result = await PostAsyncRaw<GetTransactionsResult>(WalletRoutes.GetTransactions(), new Dictionary<string, object>()
             {
                 ["wallet_id"] = $"{walletId}",
-                ["start"] = $"{start}",
-                ["end"] = $"{end}",
+                ["start"] = startIndex,
+                ["end"] = endIndex,
             });
 
             return result.Transactions;
